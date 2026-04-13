@@ -93,7 +93,7 @@ export default function BlogIndex() {
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <BookOpen size={16} />
               <span>{t.badge}</span>
@@ -150,7 +150,7 @@ export default function BlogIndex() {
                     to={`/blog/${p.slug}`}
                     className={`group block klik-card overflow-hidden magnetic-hover shimmer rounded-[40px] fade-in-up stagger-${(idx % 3) + 1}`}
                   >
-                    <div className="aspect-[16/10] w-full bg-black/20 overflow-hidden relative">
+                    <div className="aspect-[16/10] w-full bg-slate-100 overflow-hidden relative">
                       {imageUrl ? (
                         <img
                           src={imageUrl}
@@ -186,12 +186,12 @@ export default function BlogIndex() {
                         {p.excerpt || ''}
                       </p>
 
-                      <div className="pt-8 border-t border-white/10 flex items-center justify-between">
+                      <div className="pt-8 border-t border-slate-200 flex items-center justify-between">
                         <span className="text-sm font-black text-theme uppercase tracking-widest group-hover:text-violet-400 transition-colors">
                           {t.readStory}
                         </span>
-                        <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-violet-500 group-hover:border-violet-500 transition-all">
-                          <ArrowRight className="w-5 h-5 text-theme group-hover:text-white group-hover:translate-x-1 transition-all" />
+                        <div className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center group-hover:bg-violet-500 group-hover:border-violet-500 transition-all">
+                          <ArrowRight className="w-5 h-5 text-theme group-hover:text-violet-600 group-hover:translate-x-1 transition-all" />
                         </div>
                       </div>
                     </div>

@@ -1,3 +1,7 @@
+/**
+ * Page hors navigation — route commentée dans `router.tsx`.
+ * Carte d’accueil associée retirée dans `HomeOverviewCards.tsx`.
+ */
 import React, { useMemo } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
@@ -16,8 +20,6 @@ export default function Learn() {
   const t = texts[language] ?? texts.fr;
   const studies = useMemo(() => [0, 1, 2, 3], []);
 
-  const videos = useMemo(() => Array.from({ length: 4 }).map((_, i) => ({ id: i + 1 })), []);
-
   return (
     <div className="relative z-10">
       {/* Hero */}
@@ -26,7 +28,7 @@ export default function Learn() {
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <BookOpen size={16} />
               <span>{t.hub}</span>
@@ -61,7 +63,7 @@ export default function Learn() {
                 className={`klik-card group overflow-hidden rounded-[32px] magnetic-hover shimmer fade-in-up stagger-${(idx % 4) + 1}`}
               >
                 <div className="p-6 flex flex-col">
-                  <div className="rounded-2xl overflow-hidden border border-white/10 bg-black/25 flex-1 flex items-center justify-center min-h-[200px] aspect-[9/16]">
+                  <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 flex-1 flex items-center justify-center min-h-[200px] aspect-[9/16]">
                     <span className="text-theme-secondary font-bold uppercase tracking-widest text-sm md:text-base">
                       {t.comingSoon}
                     </span>
@@ -91,16 +93,16 @@ export default function Learn() {
             {videos.map((v) => (
               <div
                 key={v.id}
-                className="group klik-card overflow-hidden rounded-2xl border border-white/10 relative aspect-video"
+                className="group klik-card overflow-hidden rounded-2xl border border-slate-200 relative aspect-video"
               >
-                <div className="absolute inset-0 bg-black/60">
+                <div className="absolute inset-0 bg-slate-900/50">
                   <img src="2.png" alt="" className="w-full h-full object-cover blur-sm opacity-50 grayscale" loading="lazy" />
                 </div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                  <div className="p-3 rounded-2xl bg-black/60 border border-white/20 mb-3 shadow-lg">
+                  <div className="p-3 rounded-2xl bg-white/95 border border-slate-200 mb-3 shadow-lg">
                     <Lock className="w-8 h-8 text-violet-400" />
                   </div>
-                  <span className="text-sm font-bold text-white/90 uppercase tracking-wider text-center">
+                  <span className="text-sm font-bold text-slate-800 uppercase tracking-wider text-center">
                     {language === 'en' ? 'Next up' : 'Prochainement'}
                   </span>
                 </div>

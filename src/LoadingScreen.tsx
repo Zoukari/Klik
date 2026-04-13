@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
+const LOADING_TEXTS = [
+  'Initialisation des systèmes...',
+  'Chargement des modules quantiques...',
+  'Connexion aux serveurs distants...',
+  'Optimisation des flux de données...',
+  "Préparation de l'interface...",
+  'Synchronisation terminée...',
+] as const;
+
 const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [currentText, setCurrentText] = useState('');
+  const [currentText, setCurrentText] = useState<string>(LOADING_TEXTS[0]);
   const [showWelcome, setShowWelcome] = useState(false);
-
-  const loadingTexts = [
-    'Initialisation des systèmes...',
-    'Chargement des modules quantiques...',
-    'Connexion aux serveurs distants...',
-    'Optimisation des flux de données...',
-    'Préparation de l\'interface...',
-    'Synchronisation terminée...'
-  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           setShowWelcome(true);
@@ -30,14 +30,12 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
     }, 50);
 
     const textInterval = setInterval(() => {
-      setCurrentText(prev => {
-        const currentIndex = loadingTexts.findIndex(text => text === prev);
-        const nextIndex = (currentIndex + 1) % loadingTexts.length;
-        return loadingTexts[nextIndex];
+      setCurrentText((prev) => {
+        const currentIndex = LOADING_TEXTS.findIndex((text) => text === prev);
+        const nextIndex = (currentIndex + 1) % LOADING_TEXTS.length;
+        return LOADING_TEXTS[nextIndex];
       });
     }, 800);
-
-    setCurrentText(loadingTexts[0]);
 
     return () => {
       clearInterval(interval);
@@ -67,14 +65,9 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
         {/* Progress Bar */}
         <div className="w-80 md:w-96 mx-auto mb-8">
           <div className="loading-progress-container">
-            <div 
-              className="loading-progress-bar"
-              style={{ width: `${progress}%` }}
-            ></div>
+            <div className="loading-progress-bar" style={{ width: `${progress}%` }}></div>
           </div>
-          <div className="text-violet-400 text-sm mt-2 font-mono">
-            {progress}%
-          </div>
+          <div className="text-violet-400 text-sm mt-2 font-mono">{progress}%</div>
         </div>
 
         {/* Loading Text */}
@@ -88,9 +81,7 @@ const LoadingScreen: React.FC<{ onComplete: () => void }> = ({ onComplete }) => 
             <h2 className="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-violet-500 to-purple-600 mb-4">
               BIENVENUE DANS LE FUTUR
             </h2>
-            <p className="text-xl text-cyan-300 animate-pulse">
-              L'avenir commence maintenant...
-            </p>
+            <p className="text-xl text-cyan-300 animate-pulse">L'avenir commence maintenant...</p>
           </div>
         )}
       </div>

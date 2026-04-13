@@ -36,7 +36,7 @@ export default function Contact() {
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Mail size={16} />
               <span>{t.getInTouch}</span>
@@ -57,7 +57,7 @@ export default function Contact() {
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Infos à gauche */}
-            <div className="rounded-2xl klik-card p-8 md:p-10 border border-white/10 form-fixed overflow-hidden relative">
+            <div className="rounded-2xl klik-card p-8 md:p-10 border border-slate-200 form-fixed overflow-hidden relative">
               <div className="absolute top-0 right-0 w-64 h-64 bg-violet-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
               <div className="relative">
                 <h2 className="text-2xl md:text-3xl font-bold text-theme mb-2">
@@ -87,8 +87,8 @@ export default function Contact() {
                       <p className="text-theme-secondary text-xs mt-1">{t.reply24h}</p>
                     </div>
                   </a>
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center">
                       <Clock className="w-6 h-6 text-theme-secondary" />
                     </div>
                     <div>
@@ -96,8 +96,8 @@ export default function Contact() {
                       <p className="text-theme-secondary text-sm">24/24</p>
                     </div>
                   </div>
-                  <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                  <div className="flex items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center">
                       <MapPin className="w-6 h-6 text-theme-secondary" />
                     </div>
                     <div>
@@ -110,7 +110,7 @@ export default function Contact() {
             </div>
 
             {/* Formulaire à droite */}
-            <div className="rounded-2xl klik-card p-8 md:p-10 border border-white/10 form-fixed">
+            <div className="rounded-2xl klik-card p-8 md:p-10 border border-slate-200 form-fixed">
             <h2 className="text-2xl md:text-3xl font-bold text-theme mb-2">
               {t.sendMessage}
             </h2>
@@ -140,7 +140,7 @@ export default function Contact() {
                   placeholder={t.namePlaceholder}
                   value={form.name}
                   onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-theme placeholder:text-theme-secondary/50 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                 />
               </div>
               <div className="space-y-2">
@@ -151,7 +151,7 @@ export default function Contact() {
                   placeholder="vous@exemple.com"
                   value={form.email}
                   onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-theme placeholder:text-theme-secondary/50 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                 />
               </div>
               <div className="space-y-2">
@@ -161,7 +161,7 @@ export default function Contact() {
                   placeholder="+33 ..."
                   value={form.phone}
                   onChange={(e) => setForm((p) => ({ ...p, phone: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-theme placeholder:text-theme-secondary/50 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                 />
               </div>
               <div className="space-y-2">
@@ -187,7 +187,7 @@ export default function Contact() {
                   placeholder={t.messagePlaceholder}
                   value={form.message}
                   onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-theme placeholder:text-theme-secondary/50 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                  className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                 />
               </div>
 
@@ -198,7 +198,7 @@ export default function Contact() {
                 </button>
                 <a
                   href={`mailto:contact@klik.dj?subject=${encodeURIComponent(form.subject || 'Contact')}&body=${encodeURIComponent(`Nom: ${form.name}\nEmail: ${form.email}\nTél: ${form.phone}\n\n${form.message}`)}`}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/10 border border-white/20 text-theme font-semibold"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 font-semibold hover:bg-slate-50"
                 >
                   <Mail className="w-4 h-4" />
                   {t.sendEmail}

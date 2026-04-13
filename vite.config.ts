@@ -10,15 +10,27 @@ export default defineConfig(() => ({
     include: ['react', 'react-dom', 'react-router-dom', 'lucide-react'],
   },
   build: {
-    target: 'es2020',
+    target: 'es2022',
     minify: 'esbuild',
     sourcemap: false,
     cssMinify: true,
     chunkSizeWarningLimit: 1500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return;
+          if (id.includes('@sanity') || id.includes('@portabletext') || id.includes('dompurify')) {
+            return 'cms';
+          }
+          if (id.includes('react-router')) return 'router';
+          if (id.includes('react-dom') || id.includes('/react/')) return 'react-vendor';
+        },
+      },
+    },
   },
   server: {
     host: true,
-    port: 5173,
+    port: 5176,
     proxy: {
       // Évite les erreurs CORS en dev : les requêtes Sanity passent par le serveur Vite
       '/api/sanity': {

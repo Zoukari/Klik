@@ -31,12 +31,6 @@ type ModalState =
       type: 'lightbox';
       imageUrl: string;
       alt: string;
-    }
-  | {
-      type: 'impression';
-      itemName: string;
-      images: string[];
-      index: number;
     };
 
 const texts = {
@@ -86,13 +80,6 @@ const texts = {
     deliveryRate: 'Taux de livraison',
     responseTime: 'Temps de réponse',
     availability: 'Disponibilité',
-    article: 'Article',
-    printDesc: 'Impression premium — demandez un devis.',
-    chooseArticle: 'Choisissez un article. Demandez le prix. WhatsApp.',
-    printItemsDesc: "Des articles d'impression premium, réponse rapide.",
-    quickView: 'Aperçu',
-    quote: 'Devis',
-    askPriceWhatsApp: 'Demandez le tarif premium via WhatsApp.',
   },
   en: {
     ourExpertise: 'Our Expertise',
@@ -140,13 +127,6 @@ const texts = {
     deliveryRate: 'Delivery Rate',
     responseTime: 'Response Time',
     availability: 'Availability',
-    article: 'Article',
-    printDesc: 'Premium print — request a quote.',
-    chooseArticle: 'Choose an article. Ask for the price. WhatsApp.',
-    printItemsDesc: 'Premium print items, fast reply.',
-    quickView: 'Quick View',
-    quote: 'Quote',
-    askPriceWhatsApp: 'Ask for premium pricing on WhatsApp.',
   },
   ar: {
     ourExpertise: 'خبرتنا',
@@ -194,13 +174,6 @@ const texts = {
     deliveryRate: 'معدل التوصيل',
     responseTime: 'وقت الاستجابة',
     availability: 'التوفر',
-    article: 'منتج',
-    printDesc: 'طباعة متميزة — اطلب عرض سعر.',
-    chooseArticle: 'اختر منتجاً. اسأل عن السعر. واتساب.',
-    printItemsDesc: 'منتجات طباعة متميزة، رد سريع.',
-    quickView: 'معاينة',
-    quote: 'عرض سعر',
-    askPriceWhatsApp: 'اطلب السعر المتميز عبر واتساب.',
   },
 };
 
@@ -299,31 +272,19 @@ export default function Services() {
     return () => clearInterval(t);
   }, [saasImages.length]);
 
-  const impressions = useMemo(
-    () =>
-      Array.from({ length: 20 }).map((_, i) => ({
-        name: `${t.article} ${i + 1}`,
-        description: t.printDesc,
-        images: ['1.png', '2.png', '4.png'],
-      })),
-    [t]
-  );
-
-  const openWhatsAppPrice = (itemName: string) => {
-    const message = `J’aimerais connaître le prix de : ${itemName}`;
-    const url = `https://wa.me/25377141498?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
   return (
     <div className="relative z-10">
       {/* Hero */}
       <section className="min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
+        <div className="absolute inset-0 pointer-events-none tech-hero-grid tech-grid-drift opacity-80" aria-hidden />
+        <div className="absolute inset-0 pointer-events-none tech-scanlines opacity-70" aria-hidden />
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
+        <div className="tech-hero-blob opacity-90" aria-hidden />
+        <div className="tech-hero-blob tech-hero-blob-2 opacity-80" aria-hidden />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Globe size={16} />
               <span>{t.ourExpertise}</span>
@@ -406,7 +367,7 @@ export default function Services() {
                   {saasTargets.map((x) => (
                     <span
                       key={x}
-                      className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-violet-400 text-xs font-bold uppercase tracking-widest backdrop-blur-md"
+                      className="px-4 py-1.5 rounded-full border border-slate-200 bg-violet-50 text-violet-700 text-xs font-bold uppercase tracking-widest"
                     >
                       {x}
                     </span>
@@ -472,22 +433,22 @@ export default function Services() {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between p-6 bg-white/5 backdrop-blur-md border-t border-white/10">
+                  <div className="flex items-center justify-between p-6 bg-slate-50 border-t border-slate-200">
                     <button
                       type="button"
                       onClick={() => setSaasIndex((i) => (i - 1 + saasImages.length) % saasImages.length)}
-                      className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white"
+                      className="p-3 rounded-full bg-white border border-slate-200 hover:bg-slate-100 transition-all text-slate-800"
                       aria-label="Previous"
                     >
                       <ChevronLeft className="w-6 h-6" />
                     </button>
-                    <div className="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white font-bold text-sm tracking-widest">
+                    <div className="px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-800 font-bold text-sm tracking-widest">
                       {saasIndex + 1} / {saasImages.length}
                     </div>
                     <button
                       type="button"
                       onClick={() => setSaasIndex((i) => (i + 1) % saasImages.length)}
-                      className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white"
+                      className="p-3 rounded-full bg-white border border-slate-200 hover:bg-slate-100 transition-all text-slate-800"
                       aria-label="Next"
                     >
                       <ChevronRight className="w-6 h-6" />
@@ -512,7 +473,7 @@ export default function Services() {
             
             <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
               <div className="order-2 lg:order-1 relative">
-                <div className="rounded-[32px] klik-card p-8 bg-black/40 shadow-[0_0_80px_rgba(147,51,234,0.2)] magnetic-hover relative overflow-hidden">
+                <div className="rounded-[32px] klik-card p-8 bg-slate-50 border border-slate-200 shadow-sm magnetic-hover relative overflow-hidden">
                   <div className="absolute inset-0 shimmer opacity-10" />
                   <div className="text-theme font-black uppercase text-xs tracking-[0.3em] mb-8 opacity-60">
                     Infrastructure Preview
@@ -524,11 +485,11 @@ export default function Services() {
                       { name: 'Instagram', icon: MessageCircle, color: 'from-pink-500/20 to-purple-600/10' },
                       { name: 'Messenger', icon: MessageCircle, color: 'from-blue-400/20 to-blue-500/10' },
                     ].map((platform) => (
-                      <div key={platform.name} className={`rounded-2xl bg-gradient-to-br ${platform.color} border border-white/10 p-6 flex flex-col items-center justify-center gap-3`}>
-                        <div className="p-3 bg-white/5 rounded-xl">
-                          <platform.icon className="w-8 h-8 text-white/80" />
+                      <div key={platform.name} className={`rounded-2xl bg-gradient-to-br ${platform.color} border border-slate-200 p-6 flex flex-col items-center justify-center gap-3`}>
+                        <div className="p-3 bg-white rounded-xl border border-slate-100">
+                          <platform.icon className="w-8 h-8 text-slate-700" />
                         </div>
-                        <div className="text-xs font-bold text-white/70 uppercase tracking-wider">{platform.name}</div>
+                        <div className="text-xs font-bold text-slate-700 uppercase tracking-wider">{platform.name}</div>
                       </div>
                     ))}
                   </div>
@@ -563,80 +524,24 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Impressions — commenté */}
-      {false && (
-      <section className="py-16 md:py-20 relative z-10 text-theme lamp-section">
-        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl rounded-3xl overflow-hidden border border-emerald-500/20 bg-gradient-to-br from-emerald-950/40 via-emerald-900/20 to-transparent p-8 md:p-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-black text-emerald-300 mb-3 pb-4 border-b-2 border-emerald-500/30 inline-block">
-              {language === 'en' ? 'Impressions' : 'Impressions'}
-            </h2>
-            <p className="text-xl md:text-2xl font-bold text-theme mt-4 mb-2">
-            {language === 'en'
-              ? 'Choose an article. Ask for the price. WhatsApp.'
-              : 'Choisissez un article. Demandez le prix. WhatsApp.'}
-          </p>
-          <p className="text-theme-secondary mt-2 max-w-2xl mx-auto text-center">
-            {language === 'en'
-              ? 'Premium print items, fast reply. Simple: choose, write to us, we answer.'
-              : 'Des articles d’impression premium, réponse rapide. Simple : choisissez, écrivez-nous, on vous répond.'}
-          </p>
-          </div>
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {impressions.map((it, idx) => (
-              <button
-                key={it.name}
-                type="button"
-                onClick={() =>
-                  setModal({ type: 'impression', itemName: it.name, images: it.images, index: 0 })
-                }
-                className="text-left klik-card group p-0 magnetic-hover rounded-2xl overflow-hidden focus:outline-none focus:ring-2 focus:ring-emerald-500/40 border border-white/10"
-              >
-                <div className="aspect-square relative overflow-hidden bg-black/20">
-                  <img src={it.images[0]} alt={it.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                    <span className="klik-btn klik-btn-primary w-full py-3 text-sm flex items-center justify-center gap-2">
-                      <Sparkles size={16} />
-                      {language === 'en' ? 'Quick View' : 'Aperçu'}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-8">
-                  <div className="text-xl font-black text-theme uppercase tracking-tight mb-2">{it.name}</div>
-                  <div className="text-theme-secondary text-sm line-clamp-2 leading-relaxed">{it.description}</div>
-                  <div className="mt-6 flex items-center justify-between">
-                    <div className="text-emerald-400 font-bold text-sm tracking-widest uppercase">
-                      {language === 'en' ? 'Quote' : 'Devis'}
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-emerald-400 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-      )}
-
       {/* Modal overlay */}
       {modal.type !== 'none' && (
         <div ref={modalRef} className="fixed inset-0 z-40 flex items-center justify-center pt-[70px] pb-8">
           <button
             type="button"
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
             onClick={() => setModal({ type: 'none' })}
             aria-label="Close overlay"
           />
 
-          <div className="relative w-[min(700px,90vw)] h-[70vh] flex flex-col rounded-[32px] klik-card bg-black/95 backdrop-blur-xl text-white shadow-2xl border border-white/10 overflow-hidden">
+          <div className="relative w-[min(700px,90vw)] h-[70vh] flex flex-col rounded-[32px] klik-card bg-white backdrop-blur-xl text-slate-900 shadow-2xl border border-slate-200 overflow-hidden">
             {/* Header avec bouton close sticky */}
-            <div className="flex-shrink-0 p-6 pb-4 flex items-start justify-between border-b border-white/10">
+            <div className="flex-shrink-0 p-6 pb-4 flex items-start justify-between border-b border-slate-200">
               <div className="flex-1" />
               <button
                 type="button"
                 onClick={() => setModal({ type: 'none' })}
-                className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 transition-all text-white"
+                className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 transition-all text-slate-800"
                 aria-label="Close"
               >
                 <X className="w-5 h-5" />
@@ -652,7 +557,7 @@ export default function Services() {
                     {modal.title}
                   </h3>
                   <div className="space-y-6">
-                    {modal.blocks.map((b, blockIdx) => {
+                    {modal.blocks.map((b) => {
                       // Extract key points from text - split by sentences and take meaningful ones
                       const sentences = b.text.split(/[.!?]\s+/).filter(s => s.trim().length > 20);
                       const keyPoints = sentences.slice(0, 5);
@@ -686,7 +591,7 @@ export default function Services() {
                                     <div className={`flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br ${colorScheme.bg} border ${colorScheme.border} flex items-center justify-center ${colorScheme.icon} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
                                       <Icon className="w-5 h-5" />
                                     </div>
-                                    <p className="text-white/90 text-sm leading-relaxed flex-1">{point.trim()}</p>
+                                    <p className="text-slate-700 text-sm leading-relaxed flex-1">{point.trim()}</p>
                                   </div>
                                   {/* Hover glow effect */}
                                   <div className={`absolute inset-0 rounded-xl bg-gradient-to-br ${colorScheme.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10`} />
@@ -707,80 +612,6 @@ export default function Services() {
                     <img src="logo.png" alt="KLIK" className="w-24 md:w-32 opacity-90" />
                   </div>
                   <img src={modal.imageUrl} alt={modal.alt} className="w-full h-auto object-contain" />
-                </div>
-              )}
-
-              {modal.type === 'impression' && (
-                <div className="pt-4">
-                <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-10">
-                  <div>
-                    <div className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white mb-4">{modal.itemName}</div>
-                    <div className="text-white/60 text-lg">
-                      {t.askPriceWhatsApp}
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => openWhatsAppPrice(modal.itemName)}
-                    className="shrink-0 inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-green-500 hover:bg-green-600 text-white font-black uppercase tracking-widest transition-all transform hover:-translate-y-1 shadow-[0_0_30px_rgba(34,197,94,0.3)]"
-                  >
-                    <MessageCircle className="w-6 h-6" />
-                    WhatsApp
-                  </button>
-                </div>
-
-                <div className="rounded-[32px] klik-card overflow-hidden bg-black/40">
-                  <div className="relative aspect-[16/10]">
-                    {modal.images.map((src, i) => (
-                      <div
-                        key={`${modal.itemName}-${src}`}
-                        className="absolute inset-0"
-                        style={{
-                          opacity: i === modal.index ? 1 : 0,
-                          transition: 'opacity 800ms cubic-bezier(0.4, 0, 0.2, 1)',
-                        }}
-                      >
-                        <img src={src} alt={modal.itemName} className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex items-center justify-between p-6">
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setModal((s) =>
-                          s.type === 'impression'
-                            ? {
-                                ...s,
-                                index: (s.index - 1 + s.images.length) % s.images.length,
-                              }
-                            : s
-                        )
-                      }
-                      className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white"
-                      aria-label="Previous"
-                    >
-                      <ChevronLeft className="w-6 h-6" />
-                    </button>
-                    <div className="px-6 py-2 rounded-full bg-white/5 border border-white/10 text-white font-bold tracking-widest">
-                      {modal.index + 1} / {modal.images.length}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setModal((s) =>
-                          s.type === 'impression'
-                            ? { ...s, index: (s.index + 1) % s.images.length }
-                            : s
-                        )
-                      }
-                      className="p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-white"
-                      aria-label="Next"
-                    >
-                      <ChevronRight className="w-6 h-6" />
-                    </button>
-                  </div>
-                </div>
                 </div>
               )}
             </div>

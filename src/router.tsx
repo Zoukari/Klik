@@ -8,11 +8,13 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || undefined;
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
+/* Pages désactivées (navigation retirée) — décommenter pour réactiver
 const Learn = lazy(() => import('./pages/Learn'));
 const EntertainmentEvents = lazy(() => import('./pages/EntertainmentEvents'));
+const Careers = lazy(() => import('./pages/Careers'));
+*/
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
-const Careers = lazy(() => import('./pages/Careers'));
 const Contact = lazy(() => import('./pages/Contact'));
 
 export const router = createBrowserRouter(
@@ -24,11 +26,11 @@ export const router = createBrowserRouter(
         { path: '/', element: <Home /> },
         { path: '/about', element: <About /> },
         { path: '/services', element: <Services /> },
-        { path: '/learn', element: <Learn /> },
+        /* { path: '/learn', element: <Learn /> },
         { path: '/entertainment-events', element: <EntertainmentEvents /> },
+        { path: '/careers', element: <Careers /> }, */
         { path: '/blog', element: <BlogIndex /> },
         { path: '/blog/:slug', element: <BlogPost /> },
-        { path: '/careers', element: <Careers /> },
         { path: '/contact', element: <Contact /> },
         { path: '*', element: <Home /> },
       ],

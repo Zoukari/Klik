@@ -67,13 +67,13 @@ export default function BlogPost() {
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
           <NavLink
             to="/blog"
-            className="inline-flex items-center gap-3 text-violet-400 font-bold uppercase text-xs tracking-[0.3em] hover:text-white transition-all mb-8 group"
+            className="inline-flex items-center gap-3 text-violet-600 font-bold uppercase text-xs tracking-[0.3em] hover:text-violet-800 transition-all mb-8 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-2 transition-transform" />
             {t.backToBlog}
           </NavLink>
 
-          <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up">
             <div className="flex items-center justify-center gap-4 text-theme-secondary font-bold uppercase text-xs tracking-widest mb-6">
               <div className="p-2 bg-violet-500/10 border border-violet-500/20 rounded-lg">
                 <Calendar className="w-4 h-4 text-violet-400" />

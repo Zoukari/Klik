@@ -108,7 +108,7 @@ export default function About() {
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Users size={16} />
               <span>{t.ourStory}</span>
@@ -194,7 +194,7 @@ export default function About() {
       {/* 3) Founder message (Modernisée) */}
       <section className="py-16 md:py-24 relative z-10 text-theme lamp-section">
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
-          <div className="rounded-2xl border border-white/20 bg-white/[0.03] p-8 md:p-12">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-8 md:p-12">
           <div className="grid lg:grid-cols-[280px_1fr] gap-12 lg:gap-16 items-center">
             <div className="relative fade-in-up order-1 lg:order-1">
               <div className="max-w-[260px] md:max-w-[300px] lg:max-w-[280px] mx-auto klik-card p-2 rounded-2xl rotate-[-2deg]">
@@ -239,7 +239,7 @@ export default function About() {
             {team.map((m, idx) => (
               <div
                 key={`${m.name}-${idx}`}
-                className="klik-card group rounded-2xl overflow-hidden border border-white/10 p-8 md:p-10 flex flex-col sm:flex-row lg:flex-col items-center gap-6 text-center sm:text-left lg:text-center"
+                className="klik-card group rounded-2xl overflow-hidden border border-slate-200 p-8 md:p-10 flex flex-col sm:flex-row lg:flex-col items-center gap-6 text-center sm:text-left lg:text-center"
               >
                 <div className="relative shrink-0">
                   <div className="p-[2px] rounded-xl bg-gradient-to-br from-violet-500/50 to-purple-500/30 w-28 h-28 md:w-32 md:h-32 shrink-0 overflow-hidden">

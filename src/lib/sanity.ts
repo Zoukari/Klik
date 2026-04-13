@@ -1,5 +1,6 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
+import type { PortableTextBlock } from '@portabletext/types';
 import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
 
 const SANITY_CDN = 'https://ilu5dvrl.apicdn.sanity.io';
@@ -46,7 +47,7 @@ export type SanityPost = {
     };
   };
   publishedAt: string;
-  body?: any[];
+  body?: PortableTextBlock[];
 };
 
 export async function getPosts(): Promise<SanityPost[]> {

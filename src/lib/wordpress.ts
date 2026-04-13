@@ -23,9 +23,15 @@ async function wpFetch<T>(path: string): Promise<T> {
   return res.json();
 }
 
+type WpEmbedded = {
+  'wp:featuredmedia'?: Array<{ source_url?: string }>;
+};
+
 function postFromRaw(raw: Record<string, unknown>): WpPost {
   const feat = raw.featured_media as number | undefined;
-  const featUrl = typeof feat === 'number' && raw._embedded ? (raw._embedded as any)['wp:featuredmedia']?.[0]?.source_url : null;
+  const embedded = raw._embedded as WpEmbedded | undefined;
+  const featUrl =
+    typeof feat === 'number' ? embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null : null;
   return {
     id: (raw.id as number) ?? 0,
     slug: (raw.slug as string) ?? '',

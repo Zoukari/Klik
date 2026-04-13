@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRouteError, NavLink } from 'react-router-dom';
 
 export default function ErrorFallback() {
@@ -6,13 +5,13 @@ export default function ErrorFallback() {
   const message = error instanceof Error ? error.message : 'Une erreur inattendue s\'est produite';
 
   return (
-    <div className="min-h-screen bg-[#0f0f18] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-white text-slate-900 flex items-center justify-center p-4">
       <div className="max-w-md w-full text-center">
         <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-violet-500/20 flex items-center justify-center">
           <span className="text-4xl">⚠️</span>
         </div>
-        <h1 className="text-2xl font-bold text-white mb-2">Oups !</h1>
-        <p className="text-gray-400 mb-6">
+        <h1 className="text-2xl font-bold text-slate-900 mb-2">Oups !</h1>
+        <p className="text-slate-600 mb-6">
           {message}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -24,7 +23,7 @@ export default function ErrorFallback() {
           </button>
           <NavLink
             to="/"
-            className="px-6 py-3 rounded-xl bg-white/10 text-white font-semibold hover:bg-white/20 transition-colors"
+            className="px-6 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 font-semibold hover:bg-slate-50 transition-colors"
           >
             Retour à l'accueil
           </NavLink>

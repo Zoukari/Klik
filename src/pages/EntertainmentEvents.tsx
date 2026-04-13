@@ -1,3 +1,7 @@
+/**
+ * Page hors navigation — route commentée dans `router.tsx`.
+ * Carte d’accueil associée retirée dans `HomeOverviewCards.tsx`.
+ */
 import React, { useMemo } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Lock, Sparkles } from 'lucide-react';
@@ -42,7 +46,7 @@ export default function EntertainmentEvents() {
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Sparkles size={16} />
               <span>{t.badge}</span>

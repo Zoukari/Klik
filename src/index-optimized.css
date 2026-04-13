@@ -2,21 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root,
+:root.light {
   --header-height: 70px;
   --primary: 124, 58, 237;
   --scroll-speed: 1s;
-  --bg-theme: #000000;
-  --text-theme: #ffffff;
-  --bg-theme-secondary: #111111;
-  --text-theme-secondary: #999999;
-}
-
-:root.light {
   --bg-theme: #ffffff;
-  --text-theme: #000000;
-  --bg-theme-secondary: #f5f5f5;
-  --text-theme-secondary: #666666;
+  --text-theme: #0f172a;
+  --bg-theme-secondary: #f8fafc;
+  --text-theme-secondary: rgba(15, 23, 42, 0.72);
 }
 
 .bg-theme { background-color: var(--bg-theme); }

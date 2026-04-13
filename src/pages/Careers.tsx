@@ -1,3 +1,7 @@
+/**
+ * Page hors navigation — route commentée dans `router.tsx`.
+ * Carte d’accueil associée retirée dans `HomeOverviewCards.tsx`.
+ */
 import React, { useMemo, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Mail, MessageCircle, Users } from 'lucide-react';
@@ -75,7 +79,7 @@ export default function Careers() {
           <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
         </div>
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/[0.11] p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
               <Users size={16} />
               <span>{t.joinUs}</span>
@@ -160,7 +164,7 @@ export default function Careers() {
                   onChange={(e) =>
                     setForm((p) => ({ ...p, sector: e.target.value, subSector: '' }))
                   }
-                  className="w-full px-5 py-3 rounded-xl bg-gray-900/80 border border-white/20 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                  className="w-full px-5 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                 >
                   <option value="">{t.select}</option>
                   {sectors.map((s) => (
@@ -181,7 +185,7 @@ export default function Careers() {
                     placeholder={t.yourSector}
                     value={form.otherSector}
                     onChange={(e) => setForm((p) => ({ ...p, otherSector: e.target.value }))}
-                    className="w-full px-5 py-3 rounded-xl bg-gray-900/80 border border-white/20 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50"
+                    className="w-full px-5 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50"
                   />
                 </div>
               )}
@@ -194,7 +198,7 @@ export default function Careers() {
                   value={form.subSector}
                   onChange={(e) => setForm((p) => ({ ...p, subSector: e.target.value }))}
                   disabled={!shouldShowSub}
-                  className="w-full px-5 py-3 rounded-xl bg-gray-900/80 border border-white/20 text-white text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="w-full px-5 py-3 rounded-xl bg-white border border-slate-200 text-slate-900 text-base font-medium focus:outline-none focus:ring-2 focus:ring-violet-500/50 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <option value="">{t.select}</option>
                   {selectedSector?.subs?.map((s) => (
@@ -240,7 +244,7 @@ export default function Careers() {
                 </button>
                 <a
                   href="mailto:contact@klik.dj?subject=Postuler%20KLIK"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-theme text-base font-black uppercase tracking-widest"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl border border-slate-200 bg-white text-slate-800 text-base font-black uppercase tracking-widest hover:bg-slate-50"
                 >
                   <Mail className="w-6 h-6" />
                   {t.applyEmail}
@@ -249,7 +253,7 @@ export default function Careers() {
                   href="https://wa.me/25377141498"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-theme text-base font-black uppercase tracking-widest"
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl border border-slate-200 bg-white text-slate-800 text-base font-black uppercase tracking-widest hover:bg-slate-50"
                 >
                   {t.questions}
                 </a>

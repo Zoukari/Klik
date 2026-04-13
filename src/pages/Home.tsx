@@ -13,23 +13,19 @@ import {
   Shield,
   ShoppingBag,
   Sparkles,
-  Target,
   Truck,
   Utensils,
   X,
-  Zap,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import type { KlikTranslations, Language, Theme } from '../types/klik';
+import type { KlikTranslations, Language } from '../types/klik';
 import HomeOverviewCards from '../components/HomeOverviewCards';
-import SplineWrapper from '../components/SplineWrapper';
 
 const WorldMap = lazy(() => import('../components/WorldMap'));
 
 type OutletCtx = {
   t: KlikTranslations;
   language: Language;
-  theme: Theme;
 };
 
 type ClientItem = {
@@ -49,11 +45,29 @@ export default function Home() {
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
   const [mapInView, setMapInView] = useState(false);
   const mapRef = useRef<HTMLElement>(null);
+  const mapTitleRef = useRef<HTMLDivElement>(null);
+  const clientsTitleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const mapOb = new IntersectionObserver(([e]) => { if (e.isIntersecting) setMapInView(true); }, { rootMargin: '80px', threshold: 0.1 });
-    mapRef.current && mapOb.observe(mapRef.current);
+    const el = mapRef.current;
+    if (el) mapOb.observe(el);
     return () => mapOb.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const reveal = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    [mapTitleRef, clientsTitleRef].forEach((r) => {
+      if (r.current) reveal.observe(r.current);
+    });
+    return () => reveal.disconnect();
   }, []);
 
   const clients: ClientItem[] = useMemo(
@@ -159,99 +173,77 @@ export default function Home() {
 
   return (
     <div className="relative z-10">
-      {/* HERO avec CUBE 3D */}
+      {/* Hero */}
       <section
         id="accueil"
-        className="min-h-[calc(100vh-70px)] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-6 md:px-10 lg:px-16 lamp-section"
+        className="min-h-[calc(100vh-70px)] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-6 md:px-10 lg:px-16 border-b border-slate-300/80"
       >
-        {/* Background simple - pas d'animation */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-violet-600/10 blur-[80px] rounded-full" />
-          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-purple-600/10 blur-[80px] rounded-full" />
-        </div>
+        <div className="absolute inset-0 pointer-events-none tech-hero-grid tech-grid-drift" aria-hidden />
+        <div className="absolute inset-0 pointer-events-none tech-scanlines" aria-hidden />
+        <div className="tech-hero-blob" aria-hidden />
+        <div className="tech-hero-blob tech-hero-blob-2" aria-hidden />
 
-        <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="flex flex-col items-center text-center gap-16">
-            {/* Zone Spline - scene 3D */}
-            <div className="relative w-full max-w-[500px] h-[400px] md:h-[500px] mx-auto rounded-3xl overflow-hidden bg-black/20 border border-violet-500/30 shadow-[0_0_60px_rgba(139,92,246,0.3)]">
-              <SplineWrapper scene="/scene.splinecode" className="w-full h-full rounded-3xl" />
-              <div className="absolute inset-0 bg-gradient-to-t from-violet-900/50 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-0 left-0 right-0 pb-[12%] flex items-end justify-center z-20 pointer-events-none">
-                <h2 className="text-xl md:text-3xl font-bold text-white drop-shadow-2xl text-center px-4">
-                  KLIK <br />
-                  <span className="text-gradient-anim">{t.hero.subtitle}</span>
-                </h2>
-              </div>
+        <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-4xl">
+          <div className="flex flex-col items-center text-center gap-10 md:gap-12">
+            <div className="space-y-5">
+              <p className="tech-eyebrow text-xs font-semibold uppercase tracking-[0.22em] text-violet-600">KLIK</p>
+              <h1 className="tech-hero-title text-5xl md:text-7xl font-bold tracking-tight text-zinc-950">{t.hero.title}</h1>
+              <p className="text-2xl md:text-3xl font-semibold text-gradient-anim">{t.hero.subtitle}</p>
+              <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                {t.hero.description}
+              </p>
             </div>
 
-            {/* Texte + icônes sous le carré 3D */}
-            <div className="w-full max-w-4xl mx-auto mt-8 md:mt-12 px-4">
-              <div className="flex flex-col items-center gap-6 md:gap-8">
-                <p className="text-lg md:text-2xl text-center font-bold leading-relaxed text-theme-secondary">
-                  {t.hero.description}
-                </p>
-                <div className="flex flex-wrap justify-center gap-4 md:gap-6">
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
-                    <Lightbulb className="w-5 h-5" />
-                    <span className="text-sm font-medium">{t.home.valueInnovation}</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
-                    <Target className="w-5 h-5" />
-                    <span className="text-sm font-medium">{t.home.valuePrecision}</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
-                    <Rocket className="w-5 h-5" />
-                    <span className="text-sm font-medium">{t.home.valuePerformance}</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
-                    <Zap className="w-5 h-5" />
-                    <span className="text-sm font-medium">{t.home.valueSpeed}</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-violet-400">
-                    <Sparkles className="w-5 h-5" />
-                    <span className="text-sm font-medium">{t.home.valueImpact}</span>
-                  </div>
+            <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
+              {[
+                { Icon: Lightbulb, label: t.home.valueInnovation },
+                { Icon: Rocket, label: t.home.valuePerformance },
+                { Icon: Sparkles, label: t.home.valueImpact },
+              ].map(({ Icon, label }) => (
+                <div
+                  key={label}
+                  className="tech-value-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-zinc-200/60 border border-slate-300 text-zinc-800 text-sm font-medium"
+                >
+                  <Icon className="w-4 h-4 text-violet-600 shrink-0" />
+                  {label}
                 </div>
-                
-                {/* Boutons */}
-                <div className="flex flex-wrap justify-center gap-4 mt-6">
-                  <NavLink
-                    to="/about"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-lg font-bold rounded-2xl hover:opacity-90 transition-opacity"
-                  >
-                    {t.home.btnAbout}
-                    <ArrowRight className="w-5 h-5" />
-                  </NavLink>
-                  
-                  <NavLink
-                    to="/services"
-                    className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white text-lg font-bold rounded-2xl border border-violet-500/30 hover:bg-white/15 transition-colors"
-                  >
-                    {t.home.btnOurServices}
-                    <ArrowRight className="w-5 h-5" />
-                  </NavLink>
-                </div>
-              </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-3 pt-2">
+              <NavLink
+                to="/about"
+                className="btn-tech-primary inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 text-white text-base font-semibold rounded-xl hover:bg-violet-500"
+              >
+                {t.home.btnAbout}
+                <ArrowRight className="w-5 h-5" />
+              </NavLink>
+              <NavLink
+                to="/services"
+                className="btn-tech-secondary inline-flex items-center gap-2 px-7 py-3.5 bg-zinc-100 text-zinc-900 text-base font-semibold rounded-xl border border-slate-300 hover:border-violet-400 hover:bg-zinc-200/80"
+              >
+                {t.home.btnOurServices}
+                <ArrowRight className="w-5 h-5" />
+              </NavLink>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6 overview sections - Apple Cards */}
-      <HomeOverviewCards language={language} />
+      <HomeOverviewCards />
       {/* Map / Globe section - lazy when in view */}
       <section ref={mapRef} id="map" className="py-16 md:py-24 relative z-10 lamp-section">
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-5xl font-black text-theme mb-4 pb-4 border-b-2 border-violet-500/30 inline-block">
+          <div ref={mapTitleRef} className="text-center mb-12 scroll-reveal">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 section-title-anim inline-block">
               {t.home.mapTitle} <br />
               <span className="text-gradient-anim">{t.home.mapTitleHighlight}</span>
             </h2>
-            <p className="text-theme-secondary text-base md:text-lg max-w-2xl mx-auto">
+            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
               {t.home.mapDesc}
             </p>
           </div>
-          <div className="relative rounded-3xl overflow-hidden klik-card p-6 md:p-8 border border-white/10 min-h-[200px]">
+          <div className="relative rounded-2xl overflow-hidden klik-card p-6 md:p-8 border border-slate-300 min-h-[200px]">
             {mapInView && (
               <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
                 <WorldMap />
@@ -264,8 +256,8 @@ export default function Home() {
       {/* Clients */}
       <section id="clients" className="py-16 md:py-24 relative z-10 lamp-section overflow-visible">
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-full">
-          <div className="text-center mb-16 fade-in-up">
-            <h2 className="text-3xl md:text-5xl font-black text-theme mb-5 pb-4 border-b-2 border-violet-500/30 inline-block">
+          <div ref={clientsTitleRef} className="text-center mb-16 scroll-reveal">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5 section-title-anim inline-block">
               {t.home.clientsHeader} <br />
               <span className="text-gradient-anim">{t.home.clientsHighlight}</span>
             </h2>
