@@ -16,7 +16,7 @@ import type { KlikTranslations, Language } from '../types/klik';
 type OutletCtx = { t: KlikTranslations; language: Language };
 
 const cardShell =
-  'tech-card-lift group flex flex-col md:flex-row relative overflow-hidden rounded-2xl border border-slate-300 bg-zinc-100 shadow-sm min-h-[280px] md:min-h-[320px]';
+  'tech-card-lift group flex flex-col md:flex-row relative overflow-hidden rounded-xl border border-slate-300 bg-zinc-100 shadow-sm min-h-[150px] md:min-h-[170px] max-w-5xl mx-auto';
 
 export default function HomeOverviewCards() {
   const { t } = useOutletContext<OutletCtx>();
@@ -47,20 +47,20 @@ export default function HomeOverviewCards() {
         ref={(el) => {
           sectionsRef.current[0] = el;
         }}
-        className="scroll-reveal py-16 md:py-24 lamp-section"
+        className="scroll-reveal-ai-3 py-10 md:py-14 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
           <div className={cardShell}>
-            <div className="flex-[3] p-6 md:p-8 lg:p-12 relative z-10 min-w-0">
+            <div className="flex-[3] p-4 md:p-5 lg:p-6 relative z-10 min-w-0">
               <div className="absolute top-0 right-0 w-[320px] h-[320px] bg-violet-500/[0.06] blur-[80px] rounded-full pointer-events-none" />
               <div className="relative z-10">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6 mb-6 md:mb-10">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-5 mb-4 md:mb-6">
                   <div>
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/90 text-violet-800 text-xs font-bold mb-3 md:mb-4">
                       <Rocket size={14} />
                       <span>{t.home.servicesBadge}</span>
                     </div>
-                    <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-slate-900 section-title-anim">
+                    <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-slate-900 section-title-anim">
                       {t.home.servicesTitle2 ? (
                         <>
                           {t.home.servicesTitle1} <span className="text-gradient-anim">{t.home.servicesTitle2}</span>
@@ -78,7 +78,7 @@ export default function HomeOverviewCards() {
                     <ArrowRight className="transition-transform group-hover:translate-x-1" size={16} />
                   </NavLink>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 md:gap-3">
                   {[
                     { icon: Code, title: t.home.webApps, desc: t.home.webAppsDesc },
                     { icon: TrendingUp, title: t.home.marketing, desc: t.home.marketingDesc },
@@ -86,17 +86,17 @@ export default function HomeOverviewCards() {
                   ].map((item, i) => (
                     <div
                       key={i}
-                      className="p-5 rounded-xl bg-zinc-200/50 border border-slate-300 hover:border-violet-300 transition-colors group/card"
+                      className="tech-mini-card p-3.5 rounded-xl bg-zinc-200/50 border border-slate-300 hover:border-violet-300 transition-colors group/card"
                     >
-                      <item.icon className="w-8 h-8 text-violet-600 mb-3" />
-                      <h3 className="text-lg font-semibold text-slate-900 mb-1">{item.title}</h3>
-                      <p className="text-slate-600 text-sm">{item.desc}</p>
+                      <item.icon className="w-6 h-6 text-violet-600 mb-2" />
+                      <h3 className="text-sm md:text-base font-semibold text-slate-900 mb-1">{item.title}</h3>
+                      <p className="text-slate-600 text-xs md:text-sm">{item.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-2xl md:rounded-l-none md:rounded-r-2xl">
+            <div className="w-full md:w-[18%] h-[95px] md:h-auto min-w-[64px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-xl md:rounded-l-none md:rounded-r-xl">
               <img
                 src="services.png"
                 alt="Services"
@@ -114,20 +114,20 @@ export default function HomeOverviewCards() {
         ref={(el) => {
           sectionsRef.current[1] = el;
         }}
-        className="scroll-reveal-right scroll-delay-1 py-16 md:py-24 lamp-section"
+        className="scroll-reveal-ai-3 scroll-delay-1 py-10 md:py-14 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
           <div className={cardShell}>
-            <div className="flex-[3] p-6 md:p-8 lg:p-12 flex flex-col justify-center min-w-0">
+            <div className="flex-[3] p-4 md:p-5 lg:p-6 flex flex-col justify-center min-w-0">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-200/70 border border-slate-300 text-zinc-800 text-xs font-bold w-fit mb-3 md:mb-4">
                 <Users size={14} />
                 <span>{t.home.aboutBadge}</span>
               </div>
-              <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-3 md:mb-4 section-title-anim">
+              <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-slate-900 mb-2 md:mb-3 section-title-anim">
                 {t.home.aboutTitle}{' '}
                 <span className="text-gradient-anim">{t.home.aboutTitle2 ?? 'KLIK'}</span>
               </h2>
-              <p className="text-base md:text-lg text-slate-600 mb-4 md:mb-6 leading-relaxed">
+              <p className="text-sm md:text-base text-slate-600 mb-3 md:mb-4 leading-relaxed">
                 {t.home.aboutDesc}
               </p>
               <NavLink
@@ -138,7 +138,7 @@ export default function HomeOverviewCards() {
                 <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={16} />
               </NavLink>
             </div>
-            <div className="w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-2xl md:rounded-l-none md:rounded-r-2xl">
+            <div className="w-full md:w-[18%] h-[95px] md:h-auto min-w-[64px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-xl md:rounded-l-none md:rounded-r-xl">
               <img
                 src="about.png"
                 alt="KLIK Team"
@@ -155,7 +155,7 @@ export default function HomeOverviewCards() {
         ref={(el) => {
           sectionsRef.current[2] = el;
         }}
-        className="scroll-reveal-zoom scroll-delay-2 py-16 md:py-24 lamp-section"
+        className="scroll-reveal-ai-3 scroll-delay-2 py-10 md:py-14 lamp-section"
       >
         <div className="px-4 md:px-6 lg:px-10">
           <div className={`${cardShell} relative overflow-hidden`}>
@@ -169,7 +169,7 @@ export default function HomeOverviewCards() {
               <Star className="blog-dream-star blog-dream-star--delay-2 absolute left-[42%] top-[8%] h-2.5 w-2.5 text-white fill-white/90 drop-shadow-[0_0_6px_rgba(167,139,250,0.9)]" strokeWidth={1} />
               <Star className="blog-dream-star absolute right-[8%] top-[40%] h-3 w-3 text-fuchsia-300/80 fill-fuchsia-200/60" strokeWidth={1.2} />
             </div>
-            <div className="flex-[3] p-6 md:p-8 lg:p-12 relative z-10 min-w-0">
+            <div className="flex-[3] p-4 md:p-5 lg:p-6 relative z-10 min-w-0">
               <div className="absolute bottom-0 right-0 w-[320px] h-[320px] bg-emerald-500/[0.08] blur-[90px] rounded-full pointer-events-none" />
               <div className="absolute top-0 left-1/4 w-[200px] h-[200px] bg-violet-400/[0.07] blur-[70px] rounded-full pointer-events-none" />
               <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-8 lg:gap-12">
@@ -182,10 +182,10 @@ export default function HomeOverviewCards() {
                     <Sparkles size={14} className="text-violet-500 shrink-0" aria-hidden />
                     <span>{t.home.blogBadge}</span>
                   </div>
-                  <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-slate-900 mb-2 md:mb-3 section-title-anim">
+                  <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-slate-900 mb-2 md:mb-3 section-title-anim">
                     {t.home.blogTitle1} <span className="text-emerald-600">{t.home.blogTitle2}</span>
                   </h2>
-                  <p className="text-sm md:text-base lg:text-lg text-slate-600 mb-4 md:mb-5">
+                  <p className="text-xs md:text-sm lg:text-base text-slate-600 mb-3 md:mb-4">
                     {t.home.blogDesc}
                   </p>
                   <NavLink
@@ -198,7 +198,7 @@ export default function HomeOverviewCards() {
                 </div>
               </div>
             </div>
-            <div className="relative z-10 w-full md:w-1/4 h-[200px] md:h-auto min-w-[100px] flex-shrink-0 self-stretch overflow-hidden rounded-b-2xl md:rounded-l-none md:rounded-r-2xl">
+            <div className="relative z-10 w-full md:w-[18%] h-[95px] md:h-auto min-w-[64px] flex-shrink-0 self-stretch overflow-hidden rounded-b-xl md:rounded-l-none md:rounded-r-xl">
               <img
                 src="blog.png"
                 alt={t.nav.blog}

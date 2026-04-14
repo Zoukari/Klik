@@ -53,6 +53,7 @@ body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   min-height: 100%;
+  position: relative;
 }
 
 body::before {
@@ -62,59 +63,92 @@ body::before {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(120% 80% at 50% 100%, rgba(9, 9, 11, 0.06), transparent 55%),
-    radial-gradient(900px 420px at 15% -10%, rgba(var(--primary), 0.07), transparent 55%),
-    radial-gradient(700px 380px at 100% 100%, rgba(147, 51, 234, 0.05), transparent 50%),
-    linear-gradient(180deg, #f4f4f5 0%, #ebebef 45%, #e4e4e9 100%);
+    radial-gradient(120% 90% at 50% 100%, rgba(9, 9, 11, 0.07), transparent 58%),
+    radial-gradient(900px 420px at 15% -10%, rgba(var(--primary), 0.12), transparent 58%),
+    radial-gradient(820px 460px at 100% 100%, rgba(34, 211, 238, 0.08), transparent 58%),
+    linear-gradient(180deg, #eff1f7 0%, #e7e9f1 48%, #dde0eb 100%);
+  animation: none;
 }
 
-/* Fond « rêve » global — étoiles + halos (CSS pur, pas de JS, animation légère sur l’opacité) */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: -1;
-  opacity: 0.52;
+  opacity: 0.4;
   background-image:
-    radial-gradient(1.4px 1.4px at 6% 12%, rgba(124, 58, 237, 0.42), transparent),
-    radial-gradient(1px 1px at 14% 28%, rgba(192, 132, 252, 0.5), transparent),
-    radial-gradient(1.2px 1.2px at 22% 8%, rgba(251, 191, 36, 0.35), transparent),
-    radial-gradient(1px 1px at 31% 42%, rgba(124, 58, 237, 0.38), transparent),
-    radial-gradient(1.5px 1.5px at 38% 18%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1px 1px at 45% 55%, rgba(167, 139, 250, 0.45), transparent),
-    radial-gradient(1.2px 1.2px at 52% 33%, rgba(52, 211, 153, 0.32), transparent),
-    radial-gradient(1px 1px at 61% 12%, rgba(192, 132, 252, 0.4), transparent),
-    radial-gradient(1.3px 1.3px at 68% 48%, rgba(124, 58, 237, 0.36), transparent),
-    radial-gradient(1px 1px at 74% 22%, rgba(244, 114, 182, 0.35), transparent),
-    radial-gradient(1.4px 1.4px at 82% 38%, rgba(255, 255, 255, 0.5), transparent),
-    radial-gradient(1px 1px at 88% 14%, rgba(167, 139, 250, 0.42), transparent),
-    radial-gradient(1.2px 1.2px at 92% 52%, rgba(124, 58, 237, 0.38), transparent),
-    radial-gradient(1px 1px at 11% 62%, rgba(192, 132, 252, 0.4), transparent),
-    radial-gradient(1.3px 1.3px at 19% 78%, rgba(52, 211, 153, 0.28), transparent),
-    radial-gradient(1px 1px at 27% 92%, rgba(124, 58, 237, 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 35% 68%, rgba(251, 191, 36, 0.3), transparent),
-    radial-gradient(1px 1px at 48% 88%, rgba(167, 139, 250, 0.38), transparent),
-    radial-gradient(1.2px 1.2px at 56% 72%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 63% 58%, rgba(192, 132, 252, 0.42), transparent),
-    radial-gradient(1.4px 1.4px at 71% 82%, rgba(124, 58, 237, 0.36), transparent),
-    radial-gradient(1px 1px at 79% 94%, rgba(244, 114, 182, 0.32), transparent),
-    radial-gradient(1.2px 1.2px at 86% 68%, rgba(52, 211, 153, 0.26), transparent),
-    radial-gradient(1px 1px at 94% 78%, rgba(167, 139, 250, 0.4), transparent),
-    radial-gradient(ellipse 85% 55% at 18% 25%, rgba(167, 139, 250, 0.07), transparent 52%),
-    radial-gradient(ellipse 70% 45% at 85% 75%, rgba(52, 211, 153, 0.06), transparent 48%),
-    radial-gradient(ellipse 60% 40% at 50% 50%, rgba(192, 132, 252, 0.05), transparent 45%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  animation: site-dream-pulse 24s ease-in-out infinite alternate;
+    linear-gradient(rgba(124, 58, 237, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.08) 1px, transparent 1px),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(124, 58, 237, 0.05) 3px,
+      rgba(124, 58, 237, 0.05) 4px
+    ),
+    radial-gradient(ellipse 85% 55% at 18% 25%, rgba(167, 139, 250, 0.09), transparent 54%),
+    radial-gradient(ellipse 70% 45% at 85% 75%, rgba(52, 211, 153, 0.08), transparent 50%);
+  background-size:
+    52px 52px,
+    52px 52px,
+    100% 52px,
+    100% 100%,
+    100% 100%;
+  background-repeat: repeat, repeat, repeat, no-repeat, no-repeat;
+  animation: none;
 }
 
-@keyframes site-dream-pulse {
+@keyframes cyber-grid-drift {
   0% {
-    opacity: 0.4;
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
   }
   100% {
-    opacity: 0.58;
+    background-position:
+      52px 52px,
+      52px 52px,
+      0 52px,
+      0 0,
+      0 0;
+  }
+}
+
+@keyframes cyber-scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(52px);
+  }
+}
+
+@keyframes cyber-bg-pulse {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0.66;
+  }
+}
+
+@keyframes cyber-bg-aurora {
+  0% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after {
+    animation: none;
   }
 }
 
@@ -140,7 +174,7 @@ body::after {
 }
 
 .tech-grid-drift {
-  animation: tech-grid-drift 22s linear infinite;
+  animation: none;
 }
 
 /* Lignes type écran CRT — très subtiles, effet tech */
@@ -154,7 +188,7 @@ body::after {
 }
 
 .tech-scanlines {
-  opacity: 0.055;
+  opacity: 0.028;
   background: repeating-linear-gradient(
     180deg,
     transparent 0px,
@@ -162,7 +196,7 @@ body::after {
     rgba(124, 58, 237, 0.12) 3px,
     rgba(124, 58, 237, 0.12) 4px
   );
-  animation: tech-scanline-shift 10s linear infinite;
+  animation: none;
   mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 72%);
   -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 42%, #000 25%, transparent 72%);
 }
@@ -195,7 +229,7 @@ body::after {
     transparent 62%
   );
   filter: blur(48px);
-  animation: tech-hero-blob 9s ease-in-out infinite alternate;
+  animation: none;
 }
 
 .tech-hero-blob-2 {
@@ -205,8 +239,7 @@ body::after {
   opacity: 0.85;
   background: radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.18) 0%, rgba(124, 58, 237, 0.1) 45%, transparent 65%);
   filter: blur(36px);
-  animation-duration: 11s;
-  animation-delay: -2s;
+  animation: none;
 }
 
 h1, h2, h3, h4 {
@@ -593,6 +626,200 @@ section:last-child {
 .scroll-delay-5 { transition-delay: 0.5s; }
 .scroll-delay-6 { transition-delay: 0.6s; }
 
+/* —— Reveal « IA / tech » : zoom in, zoom out, profondeur —— */
+.scroll-reveal-up-tech {
+  opacity: 0;
+  transform: translateY(54px) scale(0.94);
+  filter: blur(5px);
+  will-change: transform, opacity, filter;
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.32, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.32, 1),
+    filter 0.75s ease;
+}
+
+.scroll-reveal-up-tech.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Reveal global sections (toutes pages) */
+.section-reveal-tech {
+  opacity: 0;
+  transform: translateY(52px) scale(0.97);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.65s ease;
+}
+
+.section-reveal-tech.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.section-reveal-delay-1 { transition-delay: 0.06s; }
+.section-reveal-delay-2 { transition-delay: 0.12s; }
+.section-reveal-delay-3 { transition-delay: 0.18s; }
+.section-reveal-delay-4 { transition-delay: 0.24s; }
+.section-reveal-delay-5 { transition-delay: 0.3s; }
+.section-reveal-delay-6 { transition-delay: 0.36s; }
+
+.card-reveal-tech {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-reveal-tech.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.card-reveal-delay-1 { transition-delay: 0.04s; }
+.card-reveal-delay-2 { transition-delay: 0.08s; }
+.card-reveal-delay-3 { transition-delay: 0.12s; }
+.card-reveal-delay-4 { transition-delay: 0.16s; }
+.card-reveal-delay-5 { transition-delay: 0.2s; }
+.card-reveal-delay-6 { transition-delay: 0.24s; }
+
+/* Liaison visuelle subtile entre sections pour un flow "tech" */
+.section-reveal-tech + .section-reveal-tech {
+  position: relative;
+}
+
+.section-reveal-tech + .section-reveal-tech::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(220px, 45vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.45), rgba(124, 58, 237, 0.62), transparent);
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+  pointer-events: none;
+  animation: none;
+}
+
+@keyframes section-bridge-flow {
+  0% {
+    opacity: 0.35;
+    background-position: 0% 50%;
+  }
+  50% {
+    opacity: 0.9;
+    background-position: 100% 50%;
+  }
+  100% {
+    opacity: 0.35;
+    background-position: 200% 50%;
+  }
+}
+
+.section-reveal-tech.visible {
+  position: relative;
+}
+
+.section-reveal-tech.visible::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.08), transparent 46%);
+  pointer-events: none;
+}
+
+.scroll-reveal-ai-1 {
+  opacity: 0;
+  transform: scale(0.88) translateY(52px);
+  filter: blur(6px);
+  will-change: transform, opacity, filter;
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.32, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.32, 1),
+    filter 0.75s ease;
+}
+
+.scroll-reveal-ai-1.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  filter: blur(0);
+}
+
+.scroll-reveal-ai-2 {
+  opacity: 0;
+  transform: translateX(64px) scale(0.92);
+  filter: blur(4px);
+  will-change: transform, opacity, filter;
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.35, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.35, 1),
+    filter 0.65s ease;
+}
+
+.scroll-reveal-ai-2.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  filter: blur(0);
+}
+
+/* Zoom out depuis avant-plan (effet « focus ») */
+.scroll-reveal-ai-3 {
+  opacity: 0;
+  transform: scale(1.1) translateY(40px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.scroll-reveal-ai-3.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Hero accueil — entrée one-shot */
+@keyframes hero-enter-ai {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(28px);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-enter-ai {
+  animation: hero-enter-ai 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Changement de page */
+@keyframes route-enter-tech {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(20px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+.page-route-enter {
+  animation: route-enter-tech 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-reveal,
   .scroll-reveal-rotate,
@@ -602,6 +829,29 @@ section:last-child {
     transition: none;
     opacity: 1;
     transform: none;
+  }
+  .scroll-reveal-ai-1,
+  .scroll-reveal-ai-2,
+  .scroll-reveal-ai-3,
+  .scroll-reveal-up-tech,
+  .section-reveal-tech,
+  .card-reveal-tech {
+    transition: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .hero-enter-ai {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .page-route-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
 
@@ -1126,6 +1376,8 @@ section:last-child {
 
 /* Cartes accueil / sections — lift + ombre néon au survol */
 .tech-card-lift {
+  position: relative;
+  isolation: isolate;
   transition:
     transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.45s ease,
@@ -1138,6 +1390,80 @@ section:last-child {
     0 28px 56px rgba(15, 23, 42, 0.14),
     0 0 0 1px rgba(124, 58, 237, 0.18),
     0 0 40px rgba(124, 58, 237, 0.08);
+}
+
+.tech-card-lift::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.7), rgba(124, 58, 237, 0.85), transparent);
+  opacity: 0.35;
+  z-index: 1;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.tech-card-lift:hover::after {
+  opacity: 0.9;
+}
+
+/* Mini-cards services — look "module IA" */
+.tech-mini-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(248, 250, 252, 0.58)),
+    radial-gradient(circle at top right, rgba(124, 58, 237, 0.12), transparent 52%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+.tech-mini-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(124, 58, 237, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, 0.06) 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.tech-mini-card:hover::before {
+  opacity: 1;
+}
+
+.client-tech-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.client-tech-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(124, 58, 237, 0.24), transparent 45%),
+    linear-gradient(120deg, rgba(34, 211, 238, 0.14), transparent 60%);
+  opacity: 0.55;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.client-tech-shell::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 12px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.6), rgba(124, 58, 237, 0.85), transparent);
+  opacity: 0.55;
+  z-index: 2;
+  pointer-events: none;
 }
 
 /* Logo header — pop au survol */
@@ -1849,7 +2175,11 @@ section {
 .scroll-reveal.visible .section-title-anim::after,
 .scroll-reveal-right.visible .section-title-anim::after,
 .scroll-reveal-left.visible .section-title-anim::after,
-.scroll-reveal-zoom.visible .section-title-anim::after {
+.scroll-reveal-zoom.visible .section-title-anim::after,
+.scroll-reveal-ai-1.visible .section-title-anim::after,
+.scroll-reveal-ai-2.visible .section-title-anim::after,
+.scroll-reveal-ai-3.visible .section-title-anim::after,
+.scroll-reveal-up-tech.visible .section-title-anim::after {
   transform: scaleX(1);
   background: linear-gradient(
     90deg,

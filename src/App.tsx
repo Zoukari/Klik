@@ -60,6 +60,66 @@ export default function App() {
   }, [location.pathname]);
 
   useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sections = Array.from(document.querySelectorAll('main section')) as HTMLElement[];
+    const revealSections = sections.filter((section) => !/\bscroll-reveal/.test(section.className));
+
+    revealSections.forEach((section, index) => {
+      section.classList.add('section-reveal-tech');
+      section.classList.add(`section-reveal-delay-${(index % 6) + 1}`);
+      if (reduceMotion) section.classList.add('visible');
+    });
+
+    if (reduceMotion || revealSections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
+    );
+
+    revealSections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cards = Array.from(document.querySelectorAll('main section .klik-card')) as HTMLElement[];
+
+    cards.forEach((card, index) => {
+      if (card.closest('.scroll-reveal-ai-3, .scroll-reveal-up-tech')) return;
+      card.classList.add('card-reveal-tech');
+      card.classList.add(`card-reveal-delay-${(index % 6) + 1}`);
+      if (reduceMotion) card.classList.add('visible');
+    });
+
+    if (reduceMotion || cards.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -42px 0px' }
+    );
+
+    cards.forEach((card) => {
+      if (!card.classList.contains('card-reveal-tech')) return;
+      observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  useEffect(() => {
     const handleScroll = () => {
       if (isMenuOpen) return;
       const scrollTop = window.scrollY;
@@ -211,9 +271,11 @@ export default function App() {
       </header>
 
       <main className="pt-[90px]">
-        <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center" aria-hidden="true"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
-          <Outlet context={{ t, language, theme }} />
-        </Suspense>
+        <div key={location.pathname} className="page-route-enter">
+          <Suspense fallback={<div className="min-h-[60vh] flex items-center justify-center" aria-hidden="true"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
+            <Outlet context={{ t, language, theme }} />
+          </Suspense>
+        </div>
       </main>
 
       <footer className="relative mt-auto pt-6 pb-6 px-4 md:px-6 lg:px-10">

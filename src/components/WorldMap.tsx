@@ -83,14 +83,14 @@ const locations = [
 export default function WorldMap() {
   return (
     <div className="w-full">
-      <p className="text-center text-theme-secondary text-sm md:text-base mb-8">
+      <p className="text-center text-theme-secondary text-sm md:text-base mb-6">
         7 villes connectées, une vision globale
       </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {locations.map((location, index) => (
           <div
             key={index}
-            className="klik-card p-6 rounded-2xl hover:scale-[1.02] transition-all duration-200 group cursor-pointer border-2 relative overflow-hidden"
+            className="klik-card p-4 rounded-2xl hover:scale-[1.01] transition-all duration-200 group cursor-pointer border border-slate-700/80 bg-slate-950/88 relative overflow-hidden"
             style={{
               background: location.gradient,
               borderColor: location.borderColor,
@@ -100,10 +100,10 @@ export default function WorldMap() {
             <div 
               className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-20 transition-opacity duration-200 rounded-2xl pointer-events-none"
               style={{ 
-                fontSize: '200px',
+                fontSize: '150px',
                 lineHeight: '1',
-                transform: 'scale(1.5)',
-                filter: 'blur(20px)',
+                transform: 'scale(1.3)',
+                filter: 'blur(14px)',
               }}
             >
               {location.flag}
@@ -116,28 +116,28 @@ export default function WorldMap() {
             ></div>
             
             {/* Overlay sombre pour lisibilité */}
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/50 transition-all duration-300 rounded-2xl"></div>
+            <div className="absolute inset-0 bg-black/70 group-hover:bg-black/64 transition-all duration-300 rounded-2xl"></div>
             
             <div className="relative z-10">
               {/* Header avec drapeau et nom */}
-              <div className="flex items-center gap-3 mb-4">
-                <div className="text-4xl drop-shadow-lg">{location.flag}</div>
+              <div className="flex items-center gap-2.5 mb-3">
+                <div className="text-3xl drop-shadow-lg">{location.flag}</div>
                 <div>
-                  <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors drop-shadow-md">
+                  <h3 className="text-lg font-bold text-white group-hover:text-violet-300 transition-colors drop-shadow-md">
                     {location.name}
                   </h3>
-                  <p className="text-sm text-white/80">{location.country}</p>
+                  <p className="text-xs text-white/80">{location.country}</p>
                 </div>
               </div>
 
               {/* Description */}
-              <p className="text-white/90 text-sm leading-relaxed mb-4 drop-shadow-sm">
+              <p className="text-white/90 text-xs leading-relaxed mb-3 drop-shadow-sm">
                 {location.description}
               </p>
 
               {/* Pin icon */}
               <div className="flex items-center gap-2 text-white/70 group-hover:text-white transition-colors">
-                <MapPin className="w-4 h-4" />
+                <MapPin className="w-3.5 h-3.5" />
                 <span className="text-xs font-medium">KLIK Présence</span>
               </div>
             </div>
@@ -152,18 +152,18 @@ export default function WorldMap() {
       </div>
 
       {/* Stats en bas */}
-      <div className="mt-12 flex flex-wrap gap-6 justify-center items-center">
-        <div className="flex items-center gap-2 klik-card px-6 py-3 rounded-full">
-          <Globe className="w-5 h-5 text-violet-400" />
-          <span className="text-theme font-semibold">7 Villes</span>
+      <div className="mt-8 flex flex-wrap gap-4 justify-center items-center">
+        <div className="flex items-center gap-2 klik-card px-4 py-2.5 rounded-full border border-slate-300 bg-zinc-100">
+          <Globe className="w-5 h-5 text-black" />
+          <span className="text-black font-semibold">7 Villes</span>
         </div>
-        <div className="flex items-center gap-2 klik-card px-6 py-3 rounded-full">
-          <MapPin className="w-5 h-5 text-violet-400" />
-          <span className="text-theme font-semibold">4 Continents</span>
+        <div className="flex items-center gap-2 klik-card px-4 py-2.5 rounded-full border border-slate-300 bg-zinc-100">
+          <MapPin className="w-5 h-5 text-black" />
+          <span className="text-black font-semibold">4 Continents</span>
         </div>
-        <div className="flex items-center gap-2 klik-card px-6 py-3 rounded-full">
+        <div className="flex items-center gap-2 klik-card px-4 py-2.5 rounded-full border border-slate-300 bg-zinc-100">
           <div className="w-5 h-5 rounded-full bg-gradient-to-br from-violet-400 to-violet-600"></div>
-          <span className="text-theme font-semibold">Réseau Global</span>
+          <span className="text-black font-semibold">Réseau Global</span>
         </div>
       </div>
     </div>

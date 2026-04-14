@@ -47,6 +47,8 @@ export default function Home() {
   const mapRef = useRef<HTMLElement>(null);
   const mapTitleRef = useRef<HTMLDivElement>(null);
   const clientsTitleRef = useRef<HTMLDivElement>(null);
+  const mapCardRef = useRef<HTMLDivElement>(null);
+  const clientCardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const mapOb = new IntersectionObserver(([e]) => { if (e.isIntersecting) setMapInView(true); }, { rootMargin: '80px', threshold: 0.1 });
@@ -64,8 +66,11 @@ export default function Home() {
       },
       { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
     );
-    [mapTitleRef, clientsTitleRef].forEach((r) => {
+    [mapTitleRef, clientsTitleRef, mapCardRef].forEach((r) => {
       if (r.current) reveal.observe(r.current);
+    });
+    clientCardsRef.current.forEach((card) => {
+      if (card) reveal.observe(card);
     });
     return () => reveal.disconnect();
   }, []);
@@ -184,7 +189,7 @@ export default function Home() {
         <div className="tech-hero-blob tech-hero-blob-2" aria-hidden />
 
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-4xl">
-          <div className="flex flex-col items-center text-center gap-10 md:gap-12">
+          <div className="hero-enter-ai flex flex-col items-center text-center gap-10 md:gap-12">
             <div className="space-y-5">
               <p className="tech-eyebrow text-xs font-semibold uppercase tracking-[0.22em] text-violet-600">KLIK</p>
               <h1 className="tech-hero-title text-5xl md:text-7xl font-bold tracking-tight text-zinc-950">{t.hero.title}</h1>
@@ -232,9 +237,9 @@ export default function Home() {
 
       <HomeOverviewCards />
       {/* Map / Globe section - lazy when in view */}
-      <section ref={mapRef} id="map" className="py-16 md:py-24 relative z-10 lamp-section">
-        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
-          <div ref={mapTitleRef} className="text-center mb-12 scroll-reveal">
+      <section ref={mapRef} id="map" className="py-14 md:py-20 relative z-10 lamp-section">
+        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-5xl">
+          <div ref={mapTitleRef} className="text-center mb-12 scroll-reveal-ai-1">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 section-title-anim inline-block">
               {t.home.mapTitle} <br />
               <span className="text-gradient-anim">{t.home.mapTitleHighlight}</span>
@@ -243,9 +248,9 @@ export default function Home() {
               {t.home.mapDesc}
             </p>
           </div>
-          <div className="relative rounded-2xl overflow-hidden klik-card p-6 md:p-8 border border-slate-300 min-h-[200px]">
+          <div ref={mapCardRef} className="scroll-reveal-up-tech relative rounded-2xl overflow-hidden klik-card p-4 md:p-6 border border-slate-300 min-h-[140px]">
             {mapInView && (
-              <Suspense fallback={<div className="min-h-[200px] flex items-center justify-center"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
+              <Suspense fallback={<div className="min-h-[140px] flex items-center justify-center"><div className="w-10 h-10 border-2 border-violet-500/30 border-t-violet-400 rounded-full animate-spin" /></div>}>
                 <WorldMap />
               </Suspense>
             )}
@@ -256,7 +261,7 @@ export default function Home() {
       {/* Clients */}
       <section id="clients" className="py-16 md:py-24 relative z-10 lamp-section overflow-visible">
         <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-full">
-          <div ref={clientsTitleRef} className="text-center mb-16 scroll-reveal">
+          <div ref={clientsTitleRef} className="text-center mb-16 scroll-reveal-ai-2">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5 section-title-anim inline-block">
               {t.home.clientsHeader} <br />
               <span className="text-gradient-anim">{t.home.clientsHighlight}</span>
@@ -273,17 +278,20 @@ export default function Home() {
               overscrollBehavior: 'contain'
             }}
           >
-            {clients.map((client) => (
+            {clients.map((client, index) => (
               <div
                 key={client.id}
-                className={`relative group cursor-pointer transition-all duration-300 ease-in-out flex-shrink-0 snap-center ${
+                ref={(el) => {
+                  clientCardsRef.current[index] = el;
+                }}
+                className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} relative group cursor-pointer transition-all duration-300 ease-in-out flex-shrink-0 snap-center ${
                   selectedClient === client.id
                     ? 'w-[75vw] max-w-[400px] md:w-[450px] h-[400px] md:h-[65vh]'
                     : 'w-[100px] md:w-[120px] h-[280px] md:h-[70vh]'
                 }`}
                 onClick={() => setSelectedClient(selectedClient === client.id ? null : client.id)}
               >
-                <div className="h-full relative overflow-hidden rounded-[32px] klik-card border-white/10 group-hover:border-white/20 transition-colors">
+                <div className="client-tech-shell h-full relative overflow-hidden rounded-[32px] klik-card border-white/10 group-hover:border-white/20 transition-colors">
                   <img
                     src={client.image}
                     alt={client.name}
