@@ -40,6 +40,12 @@
       "source": "/home",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.klikdj.com" }],
+      "destination": "https://klikdj.com/$1",
+      "permanent": true
     }
   ],
   "rewrites": [

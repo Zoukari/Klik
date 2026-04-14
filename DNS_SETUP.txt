@@ -1,0 +1,19 @@
+DNS — corriger NXDOMAIN pour klikdj.com (à faire chez le registrar / DNS, pas dans le code)
+
+1) Vercel : https://vercel.com → ton projet → Settings → Domains
+   - Ajoute : klikdj.com ET www.klikdj.com
+   - Vercel affiche les enregistrements EXACTS à créer (A ou CNAME selon le cas).
+
+2) Chez ton registrar (OVH, Cloudflare, etc.) → Zone DNS pour klikdj.com
+   - Crée les enregistrements indiqués par Vercel (souvent pour l’apex @) :
+     - Type A, nom @, valeur 76.76.21.21
+     OU ce que Vercel demande pour ton projet.
+   - Pour www :
+     - Type CNAME, nom www, valeur cname.vercel-dns.com
+     (ou la valeur affichée par Vercel)
+
+3) Attendre la propagation (souvent 5 min à 48 h). Tester : nslookup klikdj.com
+
+4) Si tu utilises Cloudflare : proxy désactivé (DNS only / gris) pour le domaine Vercel, ou suis la doc Vercel + Cloudflare.
+
+Le dépôt est déjà prêt côté build (vercel.json). Sans étapes 1–2, le navigateur affichera NXDOMAIN.
