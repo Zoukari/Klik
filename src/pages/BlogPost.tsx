@@ -60,27 +60,27 @@ export default function BlogPost() {
 
   return (
     <div className="relative z-10">
-      <section className="min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
-        </div>
+      <section className="hero-dark-band min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
+        <div className="hero-dark-glow" aria-hidden />
+        <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
           <NavLink
             to="/blog"
-            className="inline-flex items-center gap-3 text-violet-600 font-bold uppercase text-xs tracking-[0.3em] hover:text-violet-800 transition-all mb-8 group"
+            className="inline-flex items-center gap-3 text-violet-300 font-bold uppercase text-xs tracking-[0.3em] hover:text-violet-200 transition-all mb-8 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-2 transition-transform" />
             {t.backToBlog}
           </NavLink>
 
-          <div className="max-w-4xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up">
-            <div className="flex items-center justify-center gap-4 text-theme-secondary font-bold uppercase text-xs tracking-widest mb-6">
+          <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm p-8 md:p-12 text-center fade-in-up">
+            <div className="flex items-center justify-center gap-4 text-white/60 font-bold uppercase text-xs tracking-widest mb-6">
               <div className="p-2 bg-violet-500/10 border border-violet-500/20 rounded-lg">
                 <Calendar className="w-4 h-4 text-violet-400" />
               </div>
               <span>{dateLabel}</span>
             </div>
-            <h1 className="text-4xl md:text-7xl font-black text-theme leading-tight tracking-tighter">
+            <h1 className="text-4xl md:text-7xl font-black text-white leading-tight tracking-tighter">
               {post?.title || ''}
             </h1>
           </div>

@@ -20,6 +20,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import type { KlikTranslations, Language } from '../types/klik';
 import HomeOverviewCards from '../components/HomeOverviewCards';
+import HeroInteractiveBackground from '../components/HeroInteractiveBackground';
 
 const WorldMap = lazy(() => import('../components/WorldMap'));
 
@@ -201,6 +202,7 @@ export default function Home() {
       >
         <div className="hero-dark-glow" aria-hidden />
         <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <HeroInteractiveBackground />
         <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
 
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-4xl">
@@ -287,7 +289,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4">
             {clients.map((client, index) => (
               <div
                 key={client.id}
@@ -296,10 +298,10 @@ export default function Home() {
                 }}
                 className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} ${
                   visibleClientIndexes.has(index) ? 'visible' : ''
-                } group cursor-pointer`}
+                } group cursor-pointer client-badge-tap`}
                 onClick={() => setSelectedClient(client.id)}
               >
-                <div className="client-tech-shell relative overflow-hidden rounded-[24px] klik-card border-white/10 group-hover:border-white/20 transition-all duration-300 aspect-square group-hover:-translate-y-1">
+                <div className="client-tech-shell relative overflow-hidden rounded-2xl klik-card border-white/10 group-hover:border-violet-400/40 transition-all duration-300 aspect-[4/5] group-hover:-translate-y-0.5">
                   <img
                     src={client.image}
                     alt={client.name}
@@ -308,12 +310,12 @@ export default function Home() {
                     className={`absolute inset-0 w-full h-full object-cover ${client.imageClassName || ''}`}
                   />
                   <div className={`absolute inset-0 bg-gradient-to-b ${client.color} opacity-70`} />
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center gap-3">
-                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl transition-transform duration-300 group-hover:scale-110">
-                      <client.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
+                  <div className="absolute inset-0 bg-black/25" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center gap-1.5">
+                    <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl transition-transform duration-300 group-hover:scale-110">
+                      <client.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
                     </div>
-                    <h3 className="text-sm md:text-lg font-black text-white tracking-wide uppercase leading-tight">
+                    <h3 className="text-[10px] md:text-xs font-black text-white tracking-wide uppercase leading-tight line-clamp-2">
                       {client.name}
                     </h3>
                   </div>
@@ -324,17 +326,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modal client — s'ouvre au centre au clic sur une carte */}
+      {/* Modal client — s'ouvre au centre avec une vraie transition au clic */}
       {selectedClient && (() => {
         const client = clients.find((c) => c.id === selectedClient);
         if (!client) return null;
         return (
           <div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm fade-in"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm client-modal-backdrop"
             onClick={() => setSelectedClient(null)}
           >
             <div
-              className="relative w-full max-w-lg bg-black/95 border border-white/10 rounded-[28px] p-8 md:p-10 max-h-[85vh] overflow-y-auto hide-scrollbar"
+              className="relative w-full max-w-lg bg-black/95 border border-white/10 rounded-[28px] p-8 md:p-10 max-h-[85vh] overflow-y-auto hide-scrollbar client-modal-panel"
               onClick={(e) => e.stopPropagation()}
             >
               <button

@@ -94,30 +94,30 @@ export default function About() {
   ];
 
   const team = [
-    { name: 'Ravaka S.', role: 'CEO', photo: 'saro-klik.jpeg', tagline: t.ceoTagline },
-    { name: 'Zoukari A.', role: 'CTO', photo: 'zouk klik.png', tagline: t.ctoTagline },
-    { name: 'Sitraka S.', role: 'CMO', photo: 'sitraka klik.png', tagline: t.cmoTagline },
-    { name: 'Alicia P.', role: t.headPR, photo: 'cara.png', tagline: t.prTagline },
+    { name: 'Ravaka S.', role: 'CEO', photo: 'saro-klik.jpg', tagline: t.ceoTagline },
+    { name: 'Zoukari A.', role: 'CTO', photo: 'zouk klik.jpg', tagline: t.ctoTagline },
+    { name: 'Sitraka S.', role: 'CMO', photo: 'sitraka klik.jpg', tagline: t.cmoTagline },
+    { name: 'Alicia P.', role: t.headPR, photo: 'cara.jpg', tagline: t.prTagline },
   ];
 
   return (
     <div className="relative z-10">
       {/* Hero */}
-      <section className="min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
-        </div>
+      <section className="hero-dark-band min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
+        <div className="hero-dark-glow" aria-hidden />
+        <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
+            <div className="hero-dark-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full text-violet-300 text-sm font-bold mb-6 mx-auto">
               <Users size={16} />
               <span>{t.ourStory}</span>
             </div>
-            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
+            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 text-white">
               {t.about} <br />
               <span className="text-gradient-anim">KLIK</span>
             </h1>
-            <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
+            <p className="text-lg md:text-2xl text-white/60 mt-4 max-w-xl leading-relaxed mx-auto">
               {t.heroDesc}
             </p>
             <div className="mt-10 flex justify-center">
@@ -198,7 +198,7 @@ export default function About() {
           <div className="grid lg:grid-cols-[280px_1fr] gap-12 lg:gap-16 items-center">
             <div className="relative fade-in-up order-1 lg:order-1">
               <div className="max-w-[260px] md:max-w-[300px] lg:max-w-[280px] mx-auto klik-card p-2 rounded-2xl rotate-[-2deg]">
-                <img src="saro-klik.jpeg" alt="Ravaka S. - CEO" className="w-full h-auto rounded-xl object-cover" />
+                <img src="saro-klik.jpg" alt="Ravaka S. - CEO" className="w-full h-auto rounded-xl object-cover" />
               </div>
             </div>
             <div className="fade-in-up stagger-2 order-2 lg:order-2 flex-1 min-w-0">

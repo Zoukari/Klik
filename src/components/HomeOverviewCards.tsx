@@ -98,7 +98,7 @@ export default function HomeOverviewCards() {
             </div>
             <div className="w-full md:w-[18%] h-[95px] md:h-auto min-w-[64px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-xl md:rounded-l-none md:rounded-r-xl">
               <img
-                src="services.png"
+                src="services.jpg"
                 alt="Services"
                 className="w-full h-full object-cover rounded-none"
                 loading="lazy"
@@ -140,7 +140,7 @@ export default function HomeOverviewCards() {
             </div>
             <div className="w-full md:w-[18%] h-[95px] md:h-auto min-w-[64px] flex-shrink-0 self-stretch overflow-hidden relative rounded-b-xl md:rounded-l-none md:rounded-r-xl">
               <img
-                src="about.png"
+                src="about.jpg"
                 alt="KLIK Team"
                 className="w-full h-full object-cover rounded-none"
                 loading="lazy"
@@ -200,7 +200,7 @@ export default function HomeOverviewCards() {
             </div>
             <div className="relative z-10 w-full md:w-[18%] h-[95px] md:h-auto min-w-[64px] flex-shrink-0 self-stretch overflow-hidden rounded-b-xl md:rounded-l-none md:rounded-r-xl">
               <img
-                src="blog.png"
+                src="blog.jpg"
                 alt={t.nav.blog}
                 className="w-full h-full object-cover rounded-none"
                 loading="lazy"

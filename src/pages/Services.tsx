@@ -275,25 +275,21 @@ export default function Services() {
   return (
     <div className="relative z-10">
       {/* Hero */}
-      <section className="min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
-        <div className="absolute inset-0 pointer-events-none tech-hero-grid tech-grid-drift opacity-80" aria-hidden />
-        <div className="absolute inset-0 pointer-events-none tech-scanlines opacity-70" aria-hidden />
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/10 blur-[120px] rounded-full" />
-        </div>
-        <div className="tech-hero-blob opacity-90" aria-hidden />
-        <div className="tech-hero-blob tech-hero-blob-2 opacity-80" aria-hidden />
+      <section className="hero-dark-band min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
+        <div className="hero-dark-glow" aria-hidden />
+        <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-slate-200 bg-white shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-sm font-bold mb-6 mx-auto">
+          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
+            <div className="hero-dark-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full text-violet-300 text-sm font-bold mb-6 mx-auto">
               <Globe size={16} />
               <span>{t.ourExpertise}</span>
             </div>
-            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6">
+            <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight mb-6 text-white">
               {t.services} <br />
               <span className="text-gradient-anim">Premium</span>
             </h1>
-            <p className="text-lg md:text-2xl text-theme-secondary mt-4 max-w-xl leading-relaxed mx-auto">
+            <p className="text-lg md:text-2xl text-white/60 mt-4 max-w-xl leading-relaxed mx-auto">
               {t.heroDesc}
             </p>
           </div>

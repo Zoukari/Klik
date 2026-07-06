@@ -43,19 +43,21 @@ export default function App() {
   }, [language]);
 
   useEffect(() => {
-    // Always start pages from top
-    // Some pages scroll in window; some in documentElement/body depending on browser.
-    const doScrollTop = () => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      document.querySelector('main')?.scrollTo?.(0, 0);
-    };
-    doScrollTop();
-    requestAnimationFrame(doScrollTop);
+    // Toujours repartir du haut de la page à chaque navigation.
+    // On force temporairement scroll-behavior:auto pour que ce reset soit instantané
+    // et n'entre jamais en conflit avec un scroll manuel juste après le clic.
+    const html = document.documentElement;
+    const previousBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
 
-    // IMPORTANT: Fermer le menu mobile lors de la navigation
-    const id = requestAnimationFrame(() => setIsMenuOpen(false));
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.querySelector('main')?.scrollTo?.(0, 0);
+
+    const id = requestAnimationFrame(() => {
+      html.style.scrollBehavior = previousBehavior;
+      setIsMenuOpen(false);
+    });
     return () => cancelAnimationFrame(id);
   }, [location.pathname]);
 
