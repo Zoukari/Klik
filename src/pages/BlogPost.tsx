@@ -63,7 +63,6 @@ export default function BlogPost() {
       <section className="hero-dark-band min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
         <div className="hero-dark-glow" aria-hidden />
         <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
-        <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
           <NavLink
             to="/blog"

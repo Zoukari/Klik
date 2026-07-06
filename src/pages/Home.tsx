@@ -5,7 +5,6 @@ import {
   BarChart3,
   BookOpen,
   Cloud,
-  ExternalLink,
   Lightbulb,
   Package,
   Plane,
@@ -15,7 +14,6 @@ import {
   Sparkles,
   Truck,
   Utensils,
-  X,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { KlikTranslations, Language } from '../types/klik';
@@ -43,7 +41,6 @@ type ClientItem = {
 
 export default function Home() {
   const { t, language } = useOutletContext<OutletCtx>();
-  const [selectedClient, setSelectedClient] = useState<string | null>(null);
   const [visibleClientIndexes, setVisibleClientIndexes] = useState<Set<number>>(new Set());
   const [mapInView, setMapInView] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -279,17 +276,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Clients */}
+      {/* Clients — carrousel style Apple Card, purement visuel (pas de clic/popup) */}
       <section id="clients" className="py-16 md:py-24 relative z-10 lamp-section overflow-visible">
-        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
-          <div ref={clientsTitleRef} className="text-center mb-16 scroll-reveal-ai-2">
+        <div className="max-w-full">
+          <div ref={clientsTitleRef} className="text-center mb-16 scroll-reveal-ai-2 px-4 md:px-6 lg:px-10">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5 section-title-anim inline-block">
               {t.home.clientsHeader} <br />
               <span className="text-gradient-anim">{t.home.clientsHighlight}</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3 md:gap-4">
+          <div className="apple-card-carousel flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 px-4 md:px-6 lg:px-10">
             {clients.map((client, index) => (
               <div
                 key={client.id}
@@ -298,10 +295,9 @@ export default function Home() {
                 }}
                 className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} ${
                   visibleClientIndexes.has(index) ? 'visible' : ''
-                } group cursor-pointer client-badge-tap`}
-                onClick={() => setSelectedClient(client.id)}
+                } snap-center shrink-0 w-[220px] sm:w-[240px] md:w-[260px]`}
               >
-                <div className="client-tech-shell relative overflow-hidden rounded-2xl klik-card border-white/10 group-hover:border-violet-400/40 transition-all duration-300 aspect-[4/5] group-hover:-translate-y-0.5">
+                <div className="apple-card-shell relative overflow-hidden rounded-[28px] h-[300px] md:h-[340px]">
                   <img
                     src={client.image}
                     alt={client.name}
@@ -310,12 +306,12 @@ export default function Home() {
                     className={`absolute inset-0 w-full h-full object-cover ${client.imageClassName || ''}`}
                   />
                   <div className={`absolute inset-0 bg-gradient-to-b ${client.color} opacity-70`} />
-                  <div className="absolute inset-0 bg-black/25" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center gap-1.5">
-                    <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl transition-transform duration-300 group-hover:scale-110">
-                      <client.icon className="w-4 h-4 md:w-5 md:h-5 text-white" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
+                  <div className="absolute inset-0 flex flex-col items-start justify-end p-5 text-left">
+                    <div className="p-2.5 bg-white/10 backdrop-blur-md rounded-xl mb-3">
+                      <client.icon className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="text-[10px] md:text-xs font-black text-white tracking-wide uppercase leading-tight line-clamp-2">
+                    <h3 className="text-base md:text-lg font-black text-white tracking-wide uppercase leading-tight">
                       {client.name}
                     </h3>
                   </div>
@@ -325,61 +321,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Modal client — s'ouvre au centre avec une vraie transition au clic */}
-      {selectedClient && (() => {
-        const client = clients.find((c) => c.id === selectedClient);
-        if (!client) return null;
-        return (
-          <div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm client-modal-backdrop"
-            onClick={() => setSelectedClient(null)}
-          >
-            <div
-              className="relative w-full max-w-lg bg-black/95 border border-white/10 rounded-[28px] p-8 md:p-10 max-h-[85vh] overflow-y-auto hide-scrollbar client-modal-panel"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setSelectedClient(null)}
-                className="absolute top-5 right-5 p-2.5 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all"
-                aria-label="Close"
-              >
-                <X size={20} />
-              </button>
-
-              <div className="flex flex-col items-center text-center">
-                <div className="relative p-1 rounded-[24px] bg-gradient-to-r from-violet-500 to-purple-500 shadow-[0_0_30px_rgba(124,58,237,0.3)] mb-5">
-                  <div className="bg-black rounded-[23px] p-4">
-                    <img
-                      src={client.image}
-                      alt={client.name}
-                      decoding="async"
-                      className={`w-16 h-16 md:w-20 md:h-20 object-contain ${client.id === 'confidential' ? 'blur-[12px] grayscale brightness-100 opacity-95' : client.imageClassName || ''}`}
-                    />
-                  </div>
-                </div>
-                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter mb-4">
-                  {client.name}
-                </h3>
-                <p className="text-white/70 text-sm md:text-base mb-6 leading-relaxed font-medium">
-                  {client.description}
-                </p>
-                {client.website && client.visitSite && (
-                  <a
-                    href={client.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl hover:bg-violet-500 hover:text-white transition-all text-base font-bold shadow-xl"
-                  >
-                    <span>{client.visitSite}</span>
-                    <ExternalLink size={18} />
-                  </a>
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      })()}
 
       {/* Anchor target for HERO CTA */}
       <div id="contact" className="h-0 w-0 overflow-hidden" />
