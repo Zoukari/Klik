@@ -20,6 +20,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import type { KlikTranslations, Language } from '../types/klik';
 import HomeOverviewCards from '../components/HomeOverviewCards';
+import HeroInteractiveBackground from '../components/HeroInteractiveBackground';
 
 const WorldMap = lazy(() => import('../components/WorldMap'));
 
@@ -43,7 +44,11 @@ type ClientItem = {
 export default function Home() {
   const { t, language } = useOutletContext<OutletCtx>();
   const [selectedClient, setSelectedClient] = useState<string | null>(null);
+  const [visibleClientIndexes, setVisibleClientIndexes] = useState<Set<number>>(new Set());
   const [mapInView, setMapInView] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const heroBlobRef = useRef<HTMLDivElement>(null);
+  const heroBlob2Ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLElement>(null);
   const mapTitleRef = useRef<HTMLDivElement>(null);
   const clientsTitleRef = useRef<HTMLDivElement>(null);
@@ -61,7 +66,20 @@ export default function Home() {
     const reveal = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
+          if (!entry.isIntersecting) return;
+          const idx = clientCardsRef.current.indexOf(entry.target as HTMLDivElement);
+          if (idx !== -1) {
+            // Carte client : la révélation passe par le state React, pas par classList,
+            // sinon un re-render (ex: clic pour ouvrir une carte) écrase la classe "visible".
+            setVisibleClientIndexes((prev) => {
+              if (prev.has(idx)) return prev;
+              const next = new Set(prev);
+              next.add(idx);
+              return next;
+            });
+          } else {
+            entry.target.classList.add('visible');
+          }
         });
       },
       { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
@@ -73,6 +91,34 @@ export default function Home() {
       if (card) reveal.observe(card);
     });
     return () => reveal.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = heroRef.current;
+    if (!section) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const rect = section.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        if (heroBlobRef.current) {
+          heroBlobRef.current.style.transform = `translate(-50%, -50%) translate(${px * -28}px, ${py * -22}px)`;
+        }
+        if (heroBlob2Ref.current) {
+          heroBlob2Ref.current.style.transform = `translate(-50%, -50%) translate(${px * 24}px, ${py * 18}px)`;
+        }
+      });
+    };
+    section.addEventListener('mousemove', onMove);
+    return () => {
+      section.removeEventListener('mousemove', onMove);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   const clients: ClientItem[] = useMemo(
@@ -181,18 +227,30 @@ export default function Home() {
       {/* Hero */}
       <section
         id="accueil"
+        ref={heroRef}
         className="min-h-[calc(100vh-70px)] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-6 md:px-10 lg:px-16 border-b border-slate-300/80"
       >
         <div className="absolute inset-0 pointer-events-none tech-hero-grid tech-grid-drift" aria-hidden />
         <div className="absolute inset-0 pointer-events-none tech-scanlines" aria-hidden />
-        <div className="tech-hero-blob" aria-hidden />
-        <div className="tech-hero-blob tech-hero-blob-2" aria-hidden />
+        <HeroInteractiveBackground />
+        <div ref={heroBlobRef} className="tech-hero-blob" aria-hidden />
+        <div ref={heroBlob2Ref} className="tech-hero-blob tech-hero-blob-2" aria-hidden />
 
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-4xl">
           <div className="hero-enter-ai flex flex-col items-center text-center gap-10 md:gap-12">
             <div className="space-y-5">
               <p className="tech-eyebrow text-xs font-semibold uppercase tracking-[0.22em] text-violet-600">KLIK</p>
-              <h1 className="tech-hero-title text-5xl md:text-7xl font-bold tracking-tight text-zinc-950">{t.hero.title}</h1>
+              <h1 className="tech-hero-title text-5xl md:text-7xl font-bold tracking-tight text-zinc-950">
+                {t.hero.title.split('').map((letter, i) => (
+                  <span
+                    key={`${letter}-${i}`}
+                    className="hero-letter-in inline-block"
+                    style={{ animationDelay: `${0.35 + i * 0.08}s` }}
+                  >
+                    {letter}
+                  </span>
+                ))}
+              </h1>
               <p className="text-2xl md:text-3xl font-semibold text-gradient-anim">{t.hero.subtitle}</p>
               <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
                 {t.hero.description}
@@ -268,23 +326,16 @@ export default function Home() {
             </h2>
           </div>
 
-          <div 
-            className="flex flex-row gap-4 md:gap-6 overflow-x-auto overflow-y-visible pb-4 scroll-smooth snap-x snap-mandatory -mx-4 md:-mx-6 lg:-mx-10 px-4 md:px-6 lg:px-10" 
-            style={{ 
-              scrollbarWidth: 'thin', 
-              scrollbarColor: 'rgba(139,92,246,0.3) transparent', 
-              WebkitOverflowScrolling: 'touch', 
-              touchAction: 'pan-x',
-              overscrollBehavior: 'contain'
-            }}
-          >
+          <div className="flex flex-row flex-wrap justify-center gap-4 md:gap-6">
             {clients.map((client, index) => (
               <div
                 key={client.id}
                 ref={(el) => {
                   clientCardsRef.current[index] = el;
                 }}
-                className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} relative group cursor-pointer transition-all duration-300 ease-in-out flex-shrink-0 snap-center ${
+                className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} ${
+                  visibleClientIndexes.has(index) ? 'visible' : ''
+                } relative group cursor-pointer transition-all duration-300 ease-in-out flex-shrink-0 ${
                   selectedClient === client.id
                     ? 'w-[75vw] max-w-[400px] md:w-[450px] h-[400px] md:h-[65vh]'
                     : 'w-[100px] md:w-[120px] h-[280px] md:h-[70vh]'

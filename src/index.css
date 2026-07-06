@@ -230,6 +230,7 @@ body::after {
   );
   filter: blur(48px);
   animation: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tech-hero-blob-2 {
@@ -240,6 +241,45 @@ body::after {
   background: radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.18) 0%, rgba(124, 58, 237, 0.1) 45%, transparent 65%);
   filter: blur(36px);
   animation: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Titre hero — chaque lettre entre avec un rebond + flou, en cascade */
+@keyframes hero-letter-in {
+  0% {
+    opacity: 0;
+    transform: translateY(38px) scale(0.6) rotate(-8deg);
+    filter: blur(8px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.05) rotate(1deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+.hero-letter-in {
+  opacity: 0;
+  animation: hero-letter-in 0.7s cubic-bezier(0.2, 1, 0.3, 1) both;
+  background: linear-gradient(180deg, #09090b 0%, #4c1d95 160%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter-in {
+    animation: none;
+    opacity: 1;
+  }
+  .tech-hero-blob,
+  .tech-hero-blob-2 {
+    transition: none;
+  }
 }
 
 h1, h2, h3, h4 {
