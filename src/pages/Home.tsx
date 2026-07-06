@@ -20,7 +20,6 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import type { KlikTranslations, Language } from '../types/klik';
 import HomeOverviewCards from '../components/HomeOverviewCards';
-import HeroInteractiveBackground from '../components/HeroInteractiveBackground';
 
 const WorldMap = lazy(() => import('../components/WorldMap'));
 
@@ -47,8 +46,6 @@ export default function Home() {
   const [visibleClientIndexes, setVisibleClientIndexes] = useState<Set<number>>(new Set());
   const [mapInView, setMapInView] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
-  const heroBlobRef = useRef<HTMLDivElement>(null);
-  const heroBlob2Ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLElement>(null);
   const mapTitleRef = useRef<HTMLDivElement>(null);
   const clientsTitleRef = useRef<HTMLDivElement>(null);
@@ -91,34 +88,6 @@ export default function Home() {
       if (card) reveal.observe(card);
     });
     return () => reveal.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const section = heroRef.current;
-    if (!section) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    let raf = 0;
-    const onMove = (e: MouseEvent) => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const rect = section.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        if (heroBlobRef.current) {
-          heroBlobRef.current.style.transform = `translate(-50%, -50%) translate(${px * -28}px, ${py * -22}px)`;
-        }
-        if (heroBlob2Ref.current) {
-          heroBlob2Ref.current.style.transform = `translate(-50%, -50%) translate(${px * 24}px, ${py * 18}px)`;
-        }
-      });
-    };
-    section.addEventListener('mousemove', onMove);
-    return () => {
-      section.removeEventListener('mousemove', onMove);
-      if (raf) cancelAnimationFrame(raf);
-    };
   }, []);
 
   const clients: ClientItem[] = useMemo(
@@ -228,36 +197,28 @@ export default function Home() {
       <section
         id="accueil"
         ref={heroRef}
-        className="min-h-[calc(100vh-70px)] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-6 md:px-10 lg:px-16 border-b border-slate-300/80"
+        className="hero-dark-band min-h-[calc(100vh-70px)] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-6 md:px-10 lg:px-16"
       >
-        <div className="absolute inset-0 pointer-events-none tech-hero-grid tech-grid-drift" aria-hidden />
-        <div className="absolute inset-0 pointer-events-none tech-scanlines" aria-hidden />
-        <HeroInteractiveBackground />
-        <div ref={heroBlobRef} className="tech-hero-blob" aria-hidden />
-        <div ref={heroBlob2Ref} className="tech-hero-blob tech-hero-blob-2" aria-hidden />
+        <div className="hero-dark-glow" aria-hidden />
+        <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
 
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-4xl">
           <div className="hero-enter-ai flex flex-col items-center text-center gap-10 md:gap-12">
             <div className="space-y-5">
-              <p className="tech-eyebrow text-xs font-semibold uppercase tracking-[0.22em] text-violet-600">KLIK</p>
-              <h1 className="tech-hero-title text-5xl md:text-7xl font-bold tracking-tight text-zinc-950">
-                {t.hero.title.split('').map((letter, i) => (
-                  <span
-                    key={`${letter}-${i}`}
-                    className="hero-letter-in inline-block"
-                    style={{ animationDelay: `${0.35 + i * 0.08}s` }}
-                  >
-                    {letter}
-                  </span>
-                ))}
+              <p className="hero-dark-eyebrow inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-violet-300 px-4 py-1.5 rounded-full">
+                Agence marketing digital
+              </p>
+              <h1 className="hero-mask-reveal text-6xl md:text-8xl font-black tracking-tight text-white uppercase">
+                <span className="hero-mask-reveal-inner-dark">{t.hero.title}</span>
               </h1>
-              <p className="text-2xl md:text-3xl font-semibold text-gradient-anim">{t.hero.subtitle}</p>
-              <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-2xl md:text-3xl font-semibold text-gradient-anim hero-fade-up" style={{ animationDelay: '0.5s' }}>{t.hero.subtitle}</p>
+              <p className="text-base md:text-lg text-white/60 leading-relaxed max-w-2xl mx-auto hero-fade-up" style={{ animationDelay: '0.65s' }}>
                 {t.hero.description}
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-2.5 md:gap-3">
+            <div className="flex flex-wrap justify-center gap-2.5 md:gap-3 hero-fade-up" style={{ animationDelay: '0.8s' }}>
               {[
                 { Icon: Lightbulb, label: t.home.valueInnovation },
                 { Icon: Rocket, label: t.home.valuePerformance },
@@ -265,25 +226,25 @@ export default function Home() {
               ].map(({ Icon, label }) => (
                 <div
                   key={label}
-                  className="tech-value-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-zinc-200/60 border border-slate-300 text-zinc-800 text-sm font-medium"
+                  className="hero-dark-pill inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-white/85 text-sm font-medium"
                 >
-                  <Icon className="w-4 h-4 text-violet-600 shrink-0" />
+                  <Icon className="w-4 h-4 text-violet-400 shrink-0" />
                   {label}
                 </div>
               ))}
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3 pt-2">
+            <div className="flex flex-wrap justify-center gap-3 pt-2 hero-fade-up" style={{ animationDelay: '0.95s' }}>
               <NavLink
                 to="/about"
-                className="btn-tech-primary inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 text-white text-base font-semibold rounded-xl hover:bg-violet-500"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-violet-600 text-white text-base font-semibold rounded-xl hover:bg-violet-500 transition-colors"
               >
                 {t.home.btnAbout}
                 <ArrowRight className="w-5 h-5" />
               </NavLink>
               <NavLink
                 to="/services"
-                className="btn-tech-secondary inline-flex items-center gap-2 px-7 py-3.5 bg-zinc-100 text-zinc-900 text-base font-semibold rounded-xl border border-slate-300 hover:border-violet-400 hover:bg-zinc-200/80"
+                className="hero-dark-btn-secondary inline-flex items-center gap-2 px-7 py-3.5 text-white text-base font-semibold rounded-xl transition-colors"
               >
                 {t.home.btnOurServices}
                 <ArrowRight className="w-5 h-5" />
@@ -318,7 +279,7 @@ export default function Home() {
 
       {/* Clients */}
       <section id="clients" className="py-16 md:py-24 relative z-10 lamp-section overflow-visible">
-        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-full">
+        <div className="container mx-auto px-4 md:px-6 lg:px-10 max-w-6xl">
           <div ref={clientsTitleRef} className="text-center mb-16 scroll-reveal-ai-2">
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-5 section-title-anim inline-block">
               {t.home.clientsHeader} <br />
@@ -326,7 +287,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="flex flex-row flex-wrap justify-center gap-4 md:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6">
             {clients.map((client, index) => (
               <div
                 key={client.id}
@@ -335,14 +296,10 @@ export default function Home() {
                 }}
                 className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} ${
                   visibleClientIndexes.has(index) ? 'visible' : ''
-                } relative group cursor-pointer transition-all duration-300 ease-in-out flex-shrink-0 ${
-                  selectedClient === client.id
-                    ? 'w-[75vw] max-w-[400px] md:w-[450px] h-[400px] md:h-[65vh]'
-                    : 'w-[100px] md:w-[120px] h-[280px] md:h-[70vh]'
-                }`}
-                onClick={() => setSelectedClient(selectedClient === client.id ? null : client.id)}
+                } group cursor-pointer`}
+                onClick={() => setSelectedClient(client.id)}
               >
-                <div className="client-tech-shell h-full relative overflow-hidden rounded-[32px] klik-card border-white/10 group-hover:border-white/20 transition-colors">
+                <div className="client-tech-shell relative overflow-hidden rounded-[24px] klik-card border-white/10 group-hover:border-white/20 transition-all duration-300 aspect-square group-hover:-translate-y-1">
                   <img
                     src={client.image}
                     alt={client.name}
@@ -350,92 +307,77 @@ export default function Home() {
                     decoding="async"
                     className={`absolute inset-0 w-full h-full object-cover ${client.imageClassName || ''}`}
                   />
-                  
-                  {/* Overlay default */}
-                  <div
-                    className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
-                      selectedClient === client.id ? 'opacity-0' : 'opacity-100'
-                    }`}
-                  >
-                    <div className={`absolute inset-0 bg-gradient-to-b ${client.color} opacity-70 transition-opacity`} />
-                    <div className="absolute inset-0 bg-black/20" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                      <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl mb-6 transition-transform duration-500">
-                        <client.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-black text-white md:vertical-text tracking-widest uppercase">
-                        {client.name}
-                      </h3>
-                      {client.website && client.visitSite && (
-                        <a
-                          href={client.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/15 hover:bg-white/25 border border-white/20 text-white text-xs font-bold transition-all whitespace-nowrap"
-                        >
-                          {language === 'en' ? 'Visit' : 'Visiter'}
-                          <ExternalLink size={12} />
-                        </a>
-                      )}
+                  <div className={`absolute inset-0 bg-gradient-to-b ${client.color} opacity-70`} />
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-4 text-center gap-3">
+                    <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl transition-transform duration-300 group-hover:scale-110">
+                      <client.icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
                     </div>
+                    <h3 className="text-sm md:text-lg font-black text-white tracking-wide uppercase leading-tight">
+                      {client.name}
+                    </h3>
                   </div>
-
-                  {/* Expanded Content */}
-                  {selectedClient === client.id && (
-                    <div className="absolute inset-0 bg-black/90 backdrop-blur-2xl p-8 md:p-12 overflow-y-auto hide-scrollbar fade-in">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedClient(null);
-                        }}
-                        className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all"
-                        aria-label="Close"
-                      >
-                        <X size={24} />
-                      </button>
-
-                      <div className="flex flex-col items-center justify-center min-h-full text-center max-w-xl mx-auto px-4">
-                        <div className="flex flex-col items-center gap-4 mb-6">
-                          <div className="relative p-1 rounded-[24px] bg-gradient-to-r from-violet-500 to-purple-500 shadow-[0_0_30px_rgba(124,58,237,0.3)]">
-                            <div className="bg-black rounded-[23px] p-4">
-                              <img
-                                src={client.image}
-                                alt={client.name}
-                                decoding="async"
-                                className={`w-16 h-16 md:w-20 md:h-20 object-contain ${client.id === 'confidential' ? 'blur-[12px] grayscale brightness-100 opacity-95' : client.imageClassName || ''}`}
-                              />
-                            </div>
-                          </div>
-                          <h3 className="text-2xl md:text-4xl font-black text-white uppercase tracking-tighter">
-                            {client.name}
-                          </h3>
-                        </div>
-                        
-                        <p className="text-white/70 text-sm md:text-base mb-6 leading-relaxed font-medium">
-                          {client.description}
-                        </p>
-
-                        {client.website && client.visitSite && (
-                          <a
-                            href={client.website}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl hover:bg-violet-500 hover:text-white transition-all text-base md:text-lg font-bold shadow-xl"
-                          >
-                            <span>{client.visitSite}</span>
-                            <ExternalLink size={18} />
-                          </a>
-                        )}
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Modal client — s'ouvre au centre au clic sur une carte */}
+      {selectedClient && (() => {
+        const client = clients.find((c) => c.id === selectedClient);
+        if (!client) return null;
+        return (
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm fade-in"
+            onClick={() => setSelectedClient(null)}
+          >
+            <div
+              className="relative w-full max-w-lg bg-black/95 border border-white/10 rounded-[28px] p-8 md:p-10 max-h-[85vh] overflow-y-auto hide-scrollbar"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedClient(null)}
+                className="absolute top-5 right-5 p-2.5 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all"
+                aria-label="Close"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="flex flex-col items-center text-center">
+                <div className="relative p-1 rounded-[24px] bg-gradient-to-r from-violet-500 to-purple-500 shadow-[0_0_30px_rgba(124,58,237,0.3)] mb-5">
+                  <div className="bg-black rounded-[23px] p-4">
+                    <img
+                      src={client.image}
+                      alt={client.name}
+                      decoding="async"
+                      className={`w-16 h-16 md:w-20 md:h-20 object-contain ${client.id === 'confidential' ? 'blur-[12px] grayscale brightness-100 opacity-95' : client.imageClassName || ''}`}
+                    />
+                  </div>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter mb-4">
+                  {client.name}
+                </h3>
+                <p className="text-white/70 text-sm md:text-base mb-6 leading-relaxed font-medium">
+                  {client.description}
+                </p>
+                {client.website && client.visitSite && (
+                  <a
+                    href={client.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-xl hover:bg-violet-500 hover:text-white transition-all text-base font-bold shadow-xl"
+                  >
+                    <span>{client.visitSite}</span>
+                    <ExternalLink size={18} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Anchor target for HERO CTA */}
       <div id="contact" className="h-0 w-0 overflow-hidden" />

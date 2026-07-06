@@ -282,6 +282,106 @@ body::after {
   }
 }
 
+/* —— Hero « agence marketing » : bandeau dark + violet —— */
+.hero-dark-band {
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, #1a1030 0%, #0a0710 55%, #050308 100%);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+}
+
+.hero-dark-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 38%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 38%, #000 30%, transparent 100%);
+}
+
+@keyframes hero-dark-glow-pulse {
+  0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.hero-dark-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  width: min(90vw, 720px);
+  height: min(90vw, 720px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.45) 0%, rgba(139, 92, 246, 0.08) 45%, transparent 70%);
+  filter: blur(60px);
+  animation: hero-dark-glow-pulse 7s ease-in-out infinite;
+}
+
+.hero-dark-glow-2 {
+  top: 78%;
+  width: min(70vw, 480px);
+  height: min(70vw, 480px);
+  background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.22) 0%, rgba(139, 92, 246, 0.06) 45%, transparent 70%);
+  filter: blur(50px);
+  animation-duration: 9s;
+  animation-delay: 1.5s;
+}
+
+.hero-dark-eyebrow {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.hero-dark-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-dark-btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.hero-dark-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+
+/* Titre — reveal façon rideau qui se lève */
+@keyframes hero-mask-reveal-inner {
+  0% { transform: translateY(115%); }
+  100% { transform: translateY(0); }
+}
+.hero-mask-reveal {
+  overflow: hidden;
+  display: block;
+}
+.hero-mask-reveal-inner-dark {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 55%, #7c3aed 130%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hero-mask-reveal-inner 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+/* Sous-titre / description / CTA — entrée en cascade */
+@keyframes hero-fade-up {
+  0% { opacity: 0; transform: translateY(18px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-fade-up {
+  opacity: 0;
+  animation: hero-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dark-glow,
+  .hero-dark-glow-2 {
+    animation: none;
+  }
+  .hero-mask-reveal-inner-dark { animation: none; transform: translateY(0); }
+  .hero-fade-up { animation: none; opacity: 1; }
+}
+
 h1, h2, h3, h4 {
   font-family: 'Space Grotesk', 'Inter', sans-serif;
   letter-spacing: -0.02em;
