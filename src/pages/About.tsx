@@ -2,6 +2,7 @@ import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { ArrowRight, Shield, Sparkles, Target, Trophy, Users } from 'lucide-react';
 import type { Language } from '../types/klik';
+import HeroInteractiveBackground from '../components/HeroInteractiveBackground';
 
 type OutletCtx = { language: Language };
 
@@ -106,8 +107,9 @@ export default function About() {
       <section className="hero-dark-band min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
         <div className="hero-dark-glow" aria-hidden />
         <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <HeroInteractiveBackground />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
-          <div className="max-w-3xl mx-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm p-8 md:p-12 text-center fade-in-up stagger-1">
+          <div className="max-w-3xl mx-auto rounded-2xl p-8 md:p-12 text-center fade-in-up stagger-1">
             <div className="hero-dark-eyebrow inline-flex items-center gap-2 px-4 py-2 rounded-full text-violet-300 text-sm font-bold mb-6 mx-auto">
               <Users size={16} />
               <span>{t.ourStory}</span>

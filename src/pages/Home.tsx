@@ -42,6 +42,7 @@ type ClientItem = {
 export default function Home() {
   const { t, language } = useOutletContext<OutletCtx>();
   const [visibleClientIndexes, setVisibleClientIndexes] = useState<Set<number>>(new Set());
+  const [expandedClient, setExpandedClient] = useState<string | null>(null);
   const [mapInView, setMapInView] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLElement>(null);
@@ -286,7 +287,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="apple-card-carousel flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 px-4 md:px-6 lg:px-10">
+          <div className="apple-card-carousel hide-scrollbar flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 px-4 md:px-6 lg:px-10">
             {clients.map((client, index) => (
               <div
                 key={client.id}
@@ -297,7 +298,10 @@ export default function Home() {
                   visibleClientIndexes.has(index) ? 'visible' : ''
                 } snap-center shrink-0 w-[220px] sm:w-[240px] md:w-[260px]`}
               >
-                <div className="apple-card-shell relative overflow-hidden rounded-[28px] h-[300px] md:h-[340px]">
+                <div
+                  className="apple-card-shell relative overflow-hidden rounded-[28px] h-[300px] md:h-[340px] cursor-pointer"
+                  onClick={() => setExpandedClient(expandedClient === client.id ? null : client.id)}
+                >
                   <img
                     src={client.image}
                     alt={client.name}
@@ -307,13 +311,33 @@ export default function Home() {
                   />
                   <div className={`absolute inset-0 bg-gradient-to-b ${client.color} opacity-70`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
-                  <div className="absolute inset-0 flex flex-col items-start justify-end p-5 text-left">
+
+                  {/* Vue par défaut : icône + nom */}
+                  <div
+                    className={`absolute inset-0 flex flex-col items-start justify-end p-5 text-left client-face-transition ${
+                      expandedClient === client.id ? 'opacity-0' : 'opacity-100'
+                    }`}
+                  >
                     <div className="p-2.5 bg-white/10 backdrop-blur-md rounded-xl mb-3">
                       <client.icon className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-base md:text-lg font-black text-white tracking-wide uppercase leading-tight">
                       {client.name}
                     </h3>
+                  </div>
+
+                  {/* Vue description : apparaît au clic, directement dans la carte */}
+                  <div
+                    className={`absolute inset-0 flex flex-col items-start justify-end p-5 text-left bg-black/55 client-face-transition ${
+                      expandedClient === client.id ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    }`}
+                  >
+                    <h3 className="text-sm font-black text-white tracking-wide uppercase leading-tight mb-2">
+                      {client.name}
+                    </h3>
+                    <p className="text-white/85 text-xs leading-snug line-clamp-6">
+                      {client.description}
+                    </p>
                   </div>
                 </div>
               </div>

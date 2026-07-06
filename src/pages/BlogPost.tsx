@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar } from 'lucide-react';
 import { getPostBySlug, urlFor, type SanityPost } from '../lib/sanity';
 import PortableTextBlock from '../components/PortableTextBlock';
 import type { Language } from '../types/klik';
+import HeroInteractiveBackground from '../components/HeroInteractiveBackground';
 
 type OutletCtx = { language: Language };
 
@@ -63,6 +64,7 @@ export default function BlogPost() {
       <section className="hero-dark-band min-h-[50vh] flex items-center relative z-10 overflow-hidden py-16 md:py-24 px-4 md:px-6 lg:px-10 lamp-section">
         <div className="hero-dark-glow" aria-hidden />
         <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
+        <HeroInteractiveBackground />
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-6xl">
           <NavLink
             to="/blog"
@@ -72,7 +74,7 @@ export default function BlogPost() {
             {t.backToBlog}
           </NavLink>
 
-          <div className="max-w-4xl mx-auto rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm p-8 md:p-12 text-center fade-in-up">
+          <div className="max-w-4xl mx-auto rounded-2xl p-8 md:p-12 text-center fade-in-up">
             <div className="flex items-center justify-center gap-4 text-white/60 font-bold uppercase text-xs tracking-widest mb-6">
               <div className="p-2 bg-violet-500/10 border border-violet-500/20 rounded-lg">
                 <Calendar className="w-4 h-4 text-violet-400" />
