@@ -285,7 +285,7 @@ body::after {
 /* —— Hero « agence marketing » : bandeau dark + violet —— */
 .hero-dark-band {
   background: radial-gradient(ellipse 120% 100% at 50% 0%, #1a1030 0%, #0a0710 55%, #050308 100%);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+  border-bottom: 1px solid rgba(139, 92, 237, 0.15);
 }
 
 .hero-dark-grid {

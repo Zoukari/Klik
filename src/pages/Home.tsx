@@ -5,13 +5,13 @@ import {
   BarChart3,
   BookOpen,
   Cloud,
+  ExternalLink,
   Lightbulb,
   Package,
   Plane,
   Rocket,
   Scissors,
   Shield,
-  ShoppingBag,
   Sparkles,
   Truck,
   Utensils,
@@ -94,26 +94,6 @@ export default function Home() {
   const clients: ClientItem[] = useMemo(
     () => [
       {
-        id: 'shakpot',
-        name: t.clients.shakpot.name,
-        description: t.clients.shakpot.description,
-        website: t.clients.shakpot.website,
-        visitSite: t.clients.shakpot.visitSite,
-        image: '2.png',
-        color: 'from-orange-500 to-red-600',
-        icon: Utensils,
-      },
-      {
-        id: 'vagabox',
-        name: t.clients.vagabox.name,
-        description: t.clients.vagabox.description,
-        website: t.clients.vagabox.website,
-        visitSite: t.clients.vagabox.visitSite,
-        image: '1.png',
-        color: 'from-blue-500 to-cyan-500',
-        icon: Package,
-      },
-      {
         id: 'salesforce',
         name: 'Salesforce',
         description:
@@ -127,55 +107,24 @@ export default function Home() {
         icon: Cloud,
       },
       {
-        id: 'deeqsan',
-        name: t.clients.deeqsan.name,
-        description: t.clients.deeqsan.description,
-        website: t.clients.deeqsan.website,
-        visitSite: t.clients.deeqsan.visitSite,
-        image: 'Deeqsanlogo.png',
-        color: 'from-green-500 to-emerald-600',
-        icon: BookOpen,
+        id: 'vagabox',
+        name: t.clients.vagabox.name,
+        description: t.clients.vagabox.description,
+        website: t.clients.vagabox.website,
+        visitSite: t.clients.vagabox.visitSite,
+        image: 'vagabox-logo.jpg',
+        color: 'from-blue-500 to-cyan-500',
+        icon: Package,
       },
       {
-        id: 'byLouli',
-        name: t.clients.byLouli.name,
-        description: t.clients.byLouli.description,
-        website: t.clients.byLouli.website,
-        visitSite: t.clients.byLouli.visitSite,
-        image: 'logoglamourvoile.png',
-        color: 'from-amber-700 to-amber-900',
-        icon: ShoppingBag,
-      },
-      {
-        id: 'marketStudyCena',
-        name: t.clients.marketStudyCena.name,
-        description: t.clients.marketStudyCena.description,
-        website: t.clients.marketStudyCena.website,
-        visitSite: t.clients.marketStudyCena.visitSite,
-        image: 'Logo MS CENA.webp',
-        color: 'from-indigo-500 to-blue-600',
-        icon: BarChart3,
-      },
-      {
-        id: 'continentalTransit',
-        name: t.clients.continentalTransit?.name ?? 'Continental Transit',
-        description: t.clients.continentalTransit?.description ?? '',
-        website: t.clients.continentalTransit?.website ?? 'https://continental-transit.com',
-        visitSite: t.clients.continentalTransit?.visitSite ?? null,
-        image: 'continental.png',
-        color: 'from-slate-500 to-gray-600',
-        icon: Truck,
-      },
-      {
-        id: 'confidential',
-        name: t.clients.confidential?.name ?? 'Client Confidentiel',
-        description: t.clients.confidential?.description ?? '',
-        website: t.clients.confidential?.website ?? null,
-        visitSite: t.clients.confidential?.visitSite ?? null,
-        image: 'mofalogo.png',
-        imageClassName: 'blur-[20px] grayscale brightness-100 opacity-90',
-        color: 'from-zinc-500 to-zinc-700',
-        icon: Shield,
+        id: 'shakpot',
+        name: t.clients.shakpot.name,
+        description: t.clients.shakpot.description,
+        website: t.clients.shakpot.website,
+        visitSite: t.clients.shakpot.visitSite,
+        image: '2.png',
+        color: 'from-orange-500 to-red-600',
+        icon: Utensils,
       },
       {
         id: 'maisonMokary',
@@ -188,6 +137,16 @@ export default function Home() {
         icon: Scissors,
       },
       {
+        id: 'continentalTransit',
+        name: t.clients.continentalTransit?.name ?? 'Continental Transit',
+        description: t.clients.continentalTransit?.description ?? '',
+        website: t.clients.continentalTransit?.website ?? 'https://continental-transit.com',
+        visitSite: t.clients.continentalTransit?.visitSite ?? null,
+        image: 'continental.png',
+        color: 'from-slate-500 to-gray-600',
+        icon: Truck,
+      },
+      {
         id: 'dMoney',
         name: t.clients.dMoney?.name ?? 'D-MONEY',
         description: t.clients.dMoney?.description ?? '',
@@ -196,6 +155,37 @@ export default function Home() {
         image: 'd-money-logo.png',
         color: 'from-[#002565] to-[#001333]',
         icon: Wallet,
+      },
+      {
+        id: 'deeqsan',
+        name: t.clients.deeqsan.name,
+        description: t.clients.deeqsan.description,
+        website: t.clients.deeqsan.website,
+        visitSite: t.clients.deeqsan.visitSite,
+        image: 'Deeqsanlogo.png',
+        color: 'from-green-500 to-emerald-600',
+        icon: BookOpen,
+      },
+      {
+        id: 'marketStudyCena',
+        name: t.clients.marketStudyCena.name,
+        description: t.clients.marketStudyCena.description,
+        website: t.clients.marketStudyCena.website,
+        visitSite: t.clients.marketStudyCena.visitSite,
+        image: 'Logo MS CENA.webp',
+        color: 'from-indigo-500 to-blue-600',
+        icon: BarChart3,
+      },
+      {
+        id: 'confidential',
+        name: t.clients.confidential?.name ?? 'Client Confidentiel',
+        description: t.clients.confidential?.description ?? '',
+        website: t.clients.confidential?.website ?? null,
+        visitSite: t.clients.confidential?.visitSite ?? null,
+        image: 'mofalogo.png',
+        imageClassName: 'blur-[20px] grayscale brightness-100 opacity-90',
+        color: 'from-zinc-500 to-zinc-700',
+        icon: Shield,
       },
       // Must be last
       {
@@ -214,6 +204,7 @@ export default function Home() {
 
   return (
     <div className="relative z-10">
+      <HeroInteractiveBackground />
       {/* Hero */}
       <section
         id="accueil"
@@ -222,7 +213,6 @@ export default function Home() {
       >
         <div className="hero-dark-glow" aria-hidden />
         <div className="hero-dark-glow hero-dark-glow-2" aria-hidden />
-        <HeroInteractiveBackground />
         <div className="absolute inset-0 pointer-events-none hero-dark-grid" aria-hidden />
 
         <div className="container mx-auto px-4 md:px-6 lg:px-10 relative max-w-4xl">
@@ -309,7 +299,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="apple-card-carousel hide-scrollbar flex gap-5 md:gap-6 overflow-x-auto pb-4 px-4 md:px-6 lg:px-10">
+          <div className="apple-card-carousel hide-scrollbar flex flex-row gap-5 md:gap-6 overflow-x-auto pb-4 px-4 md:px-6 lg:px-10">
             {clients.map((client, index) => (
               <div
                 key={client.id}
@@ -321,7 +311,7 @@ export default function Home() {
                 } shrink-0 w-[220px] sm:w-[240px] md:w-[260px]`}
               >
                 <div
-                  className="apple-card-shell relative overflow-hidden rounded-[28px] h-[300px] md:h-[340px] cursor-pointer"
+                  className="apple-card-shell relative overflow-hidden rounded-[28px] h-[300px] md:h-[340px] cursor-pointer bg-white"
                   onClick={() => setExpandedClient(expandedClient === client.id ? null : client.id)}
                 >
                   <img
@@ -329,10 +319,9 @@ export default function Home() {
                     alt={client.name}
                     loading="lazy"
                     decoding="async"
-                    className={`absolute inset-0 w-full h-full object-cover ${client.imageClassName || ''}`}
+                    className={`absolute inset-x-6 top-6 bottom-16 w-[calc(100%-3rem)] h-auto max-h-[calc(100%-5.5rem)] m-auto object-contain drop-shadow-lg ${client.imageClassName || ''}`}
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-b ${client.color} opacity-70`} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/20" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/0 to-black/10" />
 
                   {/* Vue par défaut : icône + nom */}
                   <div
@@ -350,16 +339,28 @@ export default function Home() {
 
                   {/* Vue description : apparaît au clic, directement dans la carte */}
                   <div
-                    className={`absolute inset-0 flex flex-col items-start justify-end p-5 text-left bg-black/55 client-face-transition ${
+                    className={`absolute inset-0 flex flex-col items-start justify-end p-5 text-left bg-black/70 client-face-transition ${
                       expandedClient === client.id ? 'opacity-100' : 'opacity-0 pointer-events-none'
                     }`}
                   >
                     <h3 className="text-sm font-black text-white tracking-wide uppercase leading-tight mb-2">
                       {client.name}
                     </h3>
-                    <p className="text-white/85 text-xs leading-snug line-clamp-6">
+                    <p className="text-white/85 text-xs leading-snug line-clamp-5">
                       {client.description}
                     </p>
+                    {client.website && client.visitSite && (
+                      <a
+                        href={client.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white text-black text-xs font-bold hover:bg-violet-500 hover:text-white transition-colors"
+                      >
+                        {client.visitSite}
+                        <ExternalLink size={12} />
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>

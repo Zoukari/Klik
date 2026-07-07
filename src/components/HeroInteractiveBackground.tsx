@@ -36,7 +36,7 @@ export default function HeroInteractiveBackground() {
     let rafId = 0;
     let running = true;
 
-    const COLORS = ['124,58,237', '34,211,238', '236,72,153'];
+    const COLORS = ['124,58,237'];
 
     const resize = () => {
       const rect = container.getBoundingClientRect();
@@ -110,8 +110,8 @@ export default function HeroInteractiveBackground() {
             const midY = (a.y + b.y) / 2;
             const distToMouse = mouse.active ? Math.hypot(midX - mouse.x, midY - mouse.y) : 9999;
             const boost = distToMouse < mouseDist ? 1 - distToMouse / mouseDist : 0;
-            const baseOpacity = (1 - dist / linkDist) * 0.16;
-            const opacity = Math.min(0.55, baseOpacity + boost * 0.45);
+            const baseOpacity = (1 - dist / linkDist) * 0.14;
+            const opacity = Math.min(0.4, baseOpacity + boost * 0.35);
             if (opacity <= 0.005) continue;
             ctx.strokeStyle = `rgba(124,58,237,${opacity})`;
             ctx.lineWidth = 1;
@@ -167,7 +167,7 @@ export default function HeroInteractiveBackground() {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 pointer-events-none" aria-hidden>
+    <div ref={containerRef} className="fixed inset-0 z-0 pointer-events-none" aria-hidden>
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
