@@ -96,6 +96,8 @@ export type KlikTranslations = {
     marketStudyCena: ClientTranslation;
     continentalTransit?: ClientTranslation;
     confidential?: ClientTranslation;
+    maisonMokary?: ClientTranslation;
+    dMoney?: ClientTranslation;
   };
   footer: {
     madeBy: string;

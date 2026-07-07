@@ -75,6 +75,20 @@ const ar: KlikTranslations = {
         website: null,
         visitSite: null,
       },
+      maisonMokary: {
+        name: 'MAISON MOKARY',
+        description:
+          'بيت حرفي منذ 1992 - خياطة وتطريز وفخار وديكور صنعت باليد. كل قطعة فريدة، صُممت لتسكن المكان بحضور هادئ.',
+        website: 'https://maison-mokary.vercel.app/',
+        visitSite: 'زيارة الموقع',
+      },
+      dMoney: {
+        name: 'D-MONEY',
+        description:
+          'المحفظة الإلكترونية لجيبوتي تيليكوم - إيداع وسحب وتحويل الأموال وشحن الهاتف والدفع للتجار والفواتير، كل ذلك من الهاتف المحمول.',
+        website: 'https://d-money.dj/',
+        visitSite: 'زيارة الموقع',
+      },
     },
     footer: {
       madeBy: 'الموقع من صنع',

@@ -81,6 +81,20 @@ const en: KlikTranslations = {
         website: null,
         visitSite: null,
       },
+      maisonMokary: {
+        name: 'MAISON MOKARY',
+        description:
+          "Artisan house since 1992 - Handmade sewing, embroidery, pottery and decor. Every piece is one of a kind, crafted to inhabit a space with quiet presence.",
+        website: 'https://maison-mokary.vercel.app/',
+        visitSite: 'Visit site',
+      },
+      dMoney: {
+        name: 'D-MONEY',
+        description:
+          "Djibouti Telecom's mobile wallet - Deposits, withdrawals, money transfers, phone credit, merchant and bill payments, all from a mobile phone, for a more cashless, inclusive Djibouti.",
+        website: 'https://d-money.dj/',
+        visitSite: 'Visit site',
+      },
     },
     footer: {
       madeBy: 'Site made by',

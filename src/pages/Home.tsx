@@ -9,11 +9,13 @@ import {
   Package,
   Plane,
   Rocket,
+  Scissors,
   Shield,
   ShoppingBag,
   Sparkles,
   Truck,
   Utensils,
+  Wallet,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import type { KlikTranslations, Language } from '../types/klik';
@@ -175,6 +177,26 @@ export default function Home() {
         color: 'from-zinc-500 to-zinc-700',
         icon: Shield,
       },
+      {
+        id: 'maisonMokary',
+        name: t.clients.maisonMokary?.name ?? 'MAISON MOKARY',
+        description: t.clients.maisonMokary?.description ?? '',
+        website: t.clients.maisonMokary?.website ?? 'https://maison-mokary.vercel.app/',
+        visitSite: t.clients.maisonMokary?.visitSite ?? null,
+        image: 'maison-mokary-logo.png',
+        color: 'from-[#473929] to-[#241d15]',
+        icon: Scissors,
+      },
+      {
+        id: 'dMoney',
+        name: t.clients.dMoney?.name ?? 'D-MONEY',
+        description: t.clients.dMoney?.description ?? '',
+        website: t.clients.dMoney?.website ?? 'https://d-money.dj/',
+        visitSite: t.clients.dMoney?.visitSite ?? null,
+        image: 'd-money-logo.png',
+        color: 'from-[#002565] to-[#001333]',
+        icon: Wallet,
+      },
       // Must be last
       {
         id: 'voyageVoyage',
@@ -287,7 +309,7 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="apple-card-carousel hide-scrollbar flex gap-5 md:gap-6 overflow-x-auto snap-x snap-mandatory pb-4 px-4 md:px-6 lg:px-10">
+          <div className="apple-card-carousel hide-scrollbar flex gap-5 md:gap-6 overflow-x-auto pb-4 px-4 md:px-6 lg:px-10">
             {clients.map((client, index) => (
               <div
                 key={client.id}
@@ -296,7 +318,7 @@ export default function Home() {
                 }}
                 className={`scroll-reveal-up-tech scroll-delay-${(index % 6) + 1} ${
                   visibleClientIndexes.has(index) ? 'visible' : ''
-                } snap-center shrink-0 w-[220px] sm:w-[240px] md:w-[260px]`}
+                } shrink-0 w-[220px] sm:w-[240px] md:w-[260px]`}
               >
                 <div
                   className="apple-card-shell relative overflow-hidden rounded-[28px] h-[300px] md:h-[340px] cursor-pointer"

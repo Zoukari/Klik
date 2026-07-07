@@ -81,6 +81,20 @@ const fr: KlikTranslations = {
         website: null,
         visitSite: null,
       },
+      maisonMokary: {
+        name: 'MAISON MOKARY',
+        description:
+          "Maison d'artisanat depuis 1992 - Confection, broderie, poterie et décoration faites à la main. Chaque pièce est unique, pensée pour habiter un espace avec discrétion et présence.",
+        website: 'https://maison-mokary.vercel.app/',
+        visitSite: 'Visiter le site',
+      },
+      dMoney: {
+        name: 'D-MONEY',
+        description:
+          "Portefeuille électronique de Djibouti Télécom - Dépôt, retrait, transfert d'argent, crédit téléphonique, paiement marchand et factures, tout depuis le mobile, pour une Djibouti plus inclusive et sans cash.",
+        website: 'https://d-money.dj/',
+        visitSite: 'Visiter le site',
+      },
     },
     footer: {
       madeBy: 'Site fait par',
